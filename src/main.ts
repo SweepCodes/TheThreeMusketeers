@@ -1,21 +1,11 @@
-const logInRegisterPage = document.getElementById(
-  "log-in-register-page"
-) as HTMLDivElement;
+const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
+const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
+const logInForm = document.getElementById("log-in-form") as HTMLFormElement;
+const registerDiv = document.getElementById("register-div") as HTMLDivElement;
+const registerForm = document.getElementById("register-form") as HTMLFormElement;
 
 logInRegisterPage.addEventListener("click", (event) => {
-  if (
-    event.target instanceof HTMLElement &&
-    event.target.classList.contains("toggle-pages")
-  ) {
-    const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
-    const registerDiv = document.getElementById(
-      "register-div"
-    ) as HTMLDivElement;
-    const logInForm = document.getElementById("log-in-form") as HTMLFormElement;
-    const registerForm = document.getElementById(
-      "register-form"
-    ) as HTMLFormElement;
-
+  if (event.target instanceof HTMLElement && event.target.classList.contains("toggle-pages")) {
     logInForm.reset();
     registerForm.reset();
 
@@ -25,14 +15,8 @@ logInRegisterPage.addEventListener("click", (event) => {
 });
 
 ///// Temporary /////
-const logInForm = document.getElementById("log-in-form") as HTMLFormElement;
-const registerForm = document.getElementById(
-  "register-form"
-) as HTMLFormElement;
-
 logInForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
   const navBar = document.getElementById("nav-bar") as HTMLDivElement;
   const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
 
@@ -43,7 +27,6 @@ logInForm.addEventListener("submit", (event) => {
 
 registerForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const registerDiv = document.getElementById("register-div") as HTMLDivElement;
   const navBar = document.getElementById("nav-bar") as HTMLDivElement;
   const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
   
