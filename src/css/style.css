@@ -5,7 +5,7 @@
 }
 body{
   background-color: #FAC898;
- 
+  padding-bottom: 100px;
 }
 
 .hidden {
@@ -15,6 +15,7 @@ body{
 html{
   overscroll-behavior: none;
   margin-top: 80px;
+  
 }
 
 /* Start header CSS */
