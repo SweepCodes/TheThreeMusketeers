@@ -4,8 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
-    <script type="module" src="main.js"></script>
-    <title>Document</title>
+    <script type="module" src="main.ts"></script>
+    <title>Musketeerium</title>
   </head>
-  <body></body>
+  <body>
+    <header>Header</header>
+    <!-- Login page -->
+    <div id="login-div">
+      <h2>Login</h2>
+      <form id="login-form">
+        <label for="login-username">Username:</label>
+        <input id="login-username" type="text" />
+        <label for="login-password">Password:</label>
+        <input id="login-password" type="password" />
+        <input type="submit" value="Login" />
+      </form>
+      <p>Register account? <span>Click here!</span></p>
+    </div>
+    <!-- Register page -->
+    <div id="register-div">
+      <h2>Register</h2>
+      <form id="register-form">
+        <h3>Choose Profile Picture:</h3>
+        <div id="profile-pictures-div">
+          <p>img-1</p>
+          <p>img-2</p>
+          <p>img-3</p>
+        </div>
+        <label for="register-username">Username:</label>
+        <input id="register-username" type="text" />
+        <label for="register-password">Password:</label>
+        <input id="register-password" type="password" />
+        <label for="confirm-password">Confirm Password:</label>
+        <input id="confirm-password" type="password" />
+        <input type="submit" value="Register" />
+      </form>
+      <p>Already have an account? <span>Click here!</span></p>
+    </div>
+    <!-- Home page -->
+    <div id="home-page">
+      <h2>Home</h2>
+    </div>
+    <!-- Mobilspel page -->
+    <div id="mobile-games-forum">
+      <h2>Mobile Games Forum</h2>
+    </div>
+    <!-- Movies/Tv-shows page -->
+    <div id="movies-tv-shows-forum">
+      <h2>Movies/TV-Show Forum</h2>
+    </div>
+    <!-- E-Sport page -->
+    <div id="e-sport-forum">
+      <h2>E-Sport Forum</h2>
+    </div>
+    <footer>Footer</footer>
+  </body>
 </html>
