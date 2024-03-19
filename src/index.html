@@ -5,59 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="shortcut icon" href="./images/logo.ico" type="image/x-icon" />
-    <script type="module" src="main.ts"></script>
+    <script type="module" src="./main.ts"></script>
     <title>Musketeerium</title>
   </head>
   <body>
-    <header>Header</header>
-    <!-- Login page -->
-    <div id="login-div">
-      <h2>Login</h2>
-      <form id="login-form">
-        <label for="login-username">Username:</label>
-        <input id="login-username" type="text" />
-        <label for="login-password">Password:</label>
-        <input id="login-password" type="password" />
-        <input type="submit" value="Login" />
-      </form>
-      <p>Register account? <span>Click here!</span></p>
-    </div>
-    <!-- Register page -->
-    <div id="register-div">
-      <h2>Register</h2>
-      <form id="register-form">
-        <h3>Choose Profile Picture:</h3>
-        <div id="profile-pictures-div">
-          <p>img-1</p>
-          <p>img-2</p>
-          <p>img-3</p>
-        </div>
-        <label for="register-username">Username:</label>
-        <input id="register-username" type="text" />
-        <label for="register-password">Password:</label>
-        <input id="register-password" type="password" />
-        <label for="confirm-password">Confirm Password:</label>
-        <input id="confirm-password" type="password" />
-        <input type="submit" value="Register" />
-      </form>
-      <p>Already have an account? <span>Click here!</span></p>
+    <header>
+      <img id="logo" src="./images/logo.png" alt="logo" />
+      <nav id="nav-bar" class="hidden">
+        <ul>
+          <li><a href="#">Mobile Games</a></li>
+          <li><a href="#">Movies/TV-Shows</a></li>
+          <li><a href="#">E-Sports</a></li>
+        </ul>
+        <button>Log out</button>
+        <img src="#" alt="choosen logo" />
+      </nav>
+    </header>
+    <div id="log-in-register-page">
+      <!-- Login page -->
+      <div id="log-in-div">
+        <h2>Log In</h2>
+        <form id="log-in-form">
+          <label for="log-in-username">Username:</label>
+          <input id="log-in-username" type="text" />
+          <label for="log-in-password">Password:</label>
+          <input id="log-in-password" type="password" />
+          <input type="submit" value="Log In" />
+        </form>
+        <p>Register account? <span class="toggle-pages">Click here!</span></p>
+      </div>
+      <!-- Register page -->
+      <div id="register-div" class="hidden">
+        <h2>Register</h2>
+        <form id="register-form">
+          <h3>Choose Profile Picture:</h3>
+          <div id="profile-pictures-div">
+            <img src="./images/musketeer1.png" alt="musketeer1" />
+            <img src="./images/musketeer2.png" alt="musketeer2" />
+            <img src="./images/musketeer3.png" alt="musketeer3" />
+          </div>
+          <label for="register-username">Username:</label>
+          <input id="register-username" type="text" />
+          <label for="register-password">Password:</label>
+          <input id="register-password" type="password" />
+          <label for="confirm-password">Confirm Password:</label>
+          <input id="confirm-password" type="password" />
+          <input type="submit" value="Register" />
+        </form>
+        <p>
+          Already have an account? <span class="toggle-pages">Click here!</span>
+        </p>
+      </div>
     </div>
     <!-- Home page -->
-    <div id="home-page">
+    <div id="home-page" class="hidden">
       <h2>Home</h2>
     </div>
     <!-- Mobilspel page -->
-    <div id="mobile-games-forum">
+    <div id="mobile-games-forum" class="hidden">
       <h2>Mobile Games Forum</h2>
     </div>
     <!-- Movies/Tv-shows page -->
-    <div id="movies-tv-shows-forum">
+    <div id="movies-tv-shows-forum" class="hidden">
       <h2>Movies/TV-Show Forum</h2>
     </div>
     <!-- E-Sport page -->
-    <div id="e-sport-forum">
+    <div id="e-sport-forum" class="hidden">
       <h2>E-Sport Forum</h2>
     </div>
-    <footer>Footer</footer>
+    <!-- Profile page -->
+    <div id="profile-page" class="hidden">
+      <h2>Username:</h2>
+      <button class="hidden">Delete account</button>
+      <div></div>
+    </div>
+    <footer>
+      <img src="./images/github.png" alt="github" />
+      <img src="./images/instagram.png" alt="instagram" />
+      <img src="./images/linkedin.png" alt="linkedin" />
+      <img src="./images/twitter.png" alt="twitter" />
+    </footer>
   </body>
 </html>

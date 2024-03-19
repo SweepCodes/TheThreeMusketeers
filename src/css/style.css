@@ -3,7 +3,110 @@
   margin: 0px;
   box-sizing: border-box;
 }
+body{
+  background-color: #FAC898;
+ 
+}
 
 .hidden {
   display: none !important;
 }
+
+html{
+  overscroll-behavior: none;
+  margin-top: 80px;
+}
+
+/* Start header CSS */
+
+header{
+  display: flex;
+  border-top: solid 2px black; 
+  border-bottom: solid 2px black;
+  width: 100%;
+  height: 70px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #41444B;
+  color: whitesmoke;
+  position: fixed;
+  top: 0;
+}
+
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav ul{
+  display: flex;
+  margin-right: 300px;
+}
+
+nav ul li{
+  list-style: none;
+  padding: 20px;
+  
+}
+
+nav ul li a{
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+nav ul li:active{
+  color: whitesmoke;
+}
+
+nav ul li:hover{
+  color: #41444B;
+  background-color: #FAC898;
+}
+
+nav ul li:hover a{
+  color: #41444B;
+  background-color: #FAC898;
+}
+
+
+nav button{
+  height: 40px;
+  padding: 10px;
+}
+
+nav img{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+header #logo{
+  height: 50px;
+  margin-left: 5px;
+}
+/* End header CSS */
+
+
+
+/* Start footer CSS */
+
+footer{
+  display: flex;
+  border-bottom: solid 2px black;
+  border-top: solid 2px black;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #41444B;
+  color: whitesmoke;
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+}
+
+footer img{
+  width: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+/* End footer CSS */
