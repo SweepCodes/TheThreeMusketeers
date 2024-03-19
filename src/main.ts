@@ -36,7 +36,7 @@ logInForm.addEventListener("submit", (event) => {
   const navBar = document.getElementById("nav-bar") as HTMLDivElement;
   const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
 
-  logInDiv.classList.toggle("hidden");
+  logInDiv.classList.add("hidden");
   navBar.classList.remove("hidden");
   homePageDiv.classList.remove("hidden");
 });
@@ -46,8 +46,8 @@ registerForm.addEventListener("submit", (event) => {
   const registerDiv = document.getElementById("register-div") as HTMLDivElement;
   const navBar = document.getElementById("nav-bar") as HTMLDivElement;
   const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
-
-  registerDiv.classList.toggle("hidden");
+  
+  registerDiv.classList.add("hidden");
   navBar.classList.remove("hidden");
   homePageDiv.classList.remove("hidden");
 });
