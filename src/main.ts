@@ -1,11 +1,16 @@
 import { clearUserProfilePicChoice } from "./modules/utilities.ts";
-import { get, register } from "./modules/fetch.ts";
-get();
+import { getUsers, register, loginChecker } from "./modules/fetch.ts";
 const logInRegisterPage = document.getElementById(
   "log-in-register-page"
 ) as HTMLDivElement;
 const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
 const logInForm = document.getElementById("log-in-form") as HTMLFormElement;
+const logInUserInput = document.getElementById(
+  "log-in-username"
+) as HTMLInputElement;
+const logInPasswordInput = document.getElementById(
+  "log-in-username"
+) as HTMLInputElement;
 const registerDiv = document.getElementById("register-div") as HTMLDivElement;
 const registerForm = document.getElementById(
   "register-form"
@@ -84,16 +89,22 @@ profileImageDiv.addEventListener("click", (event) => {
   }
 });
 
-logInForm.addEventListener("submit", (event) => {
+logInForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  let loginCheck = await loginChecker(
+    logInUserInput.value,
+    logInPasswordInput.value
+  );
+  console.log(loginChecker(logInUserInput.value, logInPasswordInput.value));
 
+  if (loginCheck) {
+    logInDiv.classList.add("hidden");
+    navBar.classList.remove("hidden");
+    homePageDiv.classList.remove("hidden");
+
+    clearUserProfilePicChoice();
+  }
   logInForm.reset();
-
-  logInDiv.classList.add("hidden");
-  navBar.classList.remove("hidden");
-  homePageDiv.classList.remove("hidden");
-
-  clearUserProfilePicChoice();
 });
 
 registerForm.addEventListener("submit", (event) => {
