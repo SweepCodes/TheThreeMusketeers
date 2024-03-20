@@ -8,11 +8,6 @@ type Users = {
 export async function getUsers(): Promise<Users> {
   let response = await fetch(baseUrl + "/.json");
   let data = await response.json();
-  // for (const key in data.users) {
-  //   console.log(data.users[key].username);
-  //   console.log(data.users[key].password);
-  //   console.log(data.users[key].profilepic);
-  // }
   return data.users as Users;
 }
 // export async function getComments() {
@@ -45,23 +40,18 @@ export async function register(
   console.log(data);
 }
 
-export async function loginChecker(user: string, pass: string) {
+export async function loginChecker(
+  user: string,
+  pass: string
+): Promise<boolean> {
   const users = await getUsers();
-  let username;
-  let password;
-  let isLoggedIn = false;
-
   for (const key in users) {
-    username = users[key].username;
-    password = users[key].password;
+    const currentUser = users[key];
+    if (currentUser.username === user && currentUser.password === pass)
+      return true;
   }
-  if (username === user && password === pass) {
-    isLoggedIn = true;
-  } else {
-    alert("Wrong username or password");
-    return;
-  }
-  return isLoggedIn;
+  alert("Wrong username or password");
+  return false;
 }
 //   export async function postComment() {
 //     const commentsUrl = ``
