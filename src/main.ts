@@ -110,7 +110,20 @@ registerForm.addEventListener("submit", (event) => {
 const navbarUl = document.getElementById("nav-ul") as HTMLElement;
 
 navbarUl.addEventListener("click", (event)=>{
-  if(event.target instanceof HTMLElement && event.target.innerText == "Mobile Games"){
+  const target = event.target as HTMLElement;
+  if(target.innerText == "Mobile Games"){
+    mobileGamesDiv.classList.remove("hidden");
+    moviesTVShowsDiv.classList.add("hidden")
+    eSportsDiv.classList.add("hidden");
+    homePageDiv.classList.add("hidden")
+  }
+  else if(target.innerText == "Mobile Games"){
+    mobileGamesDiv.classList.remove("hidden");
+    moviesTVShowsDiv.classList.add("hidden")
+    eSportsDiv.classList.add("hidden");
+    homePageDiv.classList.add("hidden")
+  }
+  else if(target.innerText == "Mobile Games"){
     mobileGamesDiv.classList.remove("hidden");
     moviesTVShowsDiv.classList.add("hidden")
     eSportsDiv.classList.add("hidden");
