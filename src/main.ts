@@ -152,7 +152,7 @@ headerNavbar.addEventListener("click", (event) => {
     mobileGamesDiv.classList.add("hidden");
     moviesTVShowsDiv.classList.add("hidden");
     homePageDiv.classList.add("hidden");
-  } else if (target.id == "logo") {
+  } else if (target.id == "logo" && !navBar.classList.contains("hidden")) {
     homePageDiv.classList.remove("hidden");
     eSportsDiv.classList.add("hidden");
     mobileGamesDiv.classList.add("hidden");
