@@ -1,9 +1,13 @@
-const baseUrl = `https://musketeerium-default-rtdb.europe-west1.firebasedatabase.app/.json`;
+const baseUrl = `https://musketeerium-default-rtdb.europe-west1.firebasedatabase.app/`;
 
 export async function get() {
-  let response = await fetch(baseUrl);
+  let response = await fetch(baseUrl + "/.json");
   let data = await response.json();
-  for (const key in data) {
+  for (const key in data.comments) {
+    console.log(key);
+  }
+  for (const key in data.users) {
+    console.log(key);
   }
   return data;
 }

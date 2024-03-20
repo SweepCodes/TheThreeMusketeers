@@ -1,5 +1,6 @@
 import { clearUserProfilePicChoice } from "./modules/utilities.ts";
-
+import { get, register } from "./modules/fetch.ts";
+get();
 const logInRegisterPage = document.getElementById(
   "log-in-register-page"
 ) as HTMLDivElement;
@@ -9,6 +10,9 @@ const registerDiv = document.getElementById("register-div") as HTMLDivElement;
 const registerForm = document.getElementById(
   "register-form"
 ) as HTMLFormElement;
+const registerUsernameInputElement = document.getElementById(
+  "register-username"
+) as HTMLInputElement;
 const registerPasswordInputElement = document.getElementById(
   "register-password"
 ) as HTMLInputElement;
@@ -29,6 +33,7 @@ const profileImgElementThree = document.getElementById(
 ) as HTMLImageElement;
 const navBar = document.getElementById("nav-bar") as HTMLDivElement;
 const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
+let chosenImage: string;
 
 logInRegisterPage.addEventListener("click", (event) => {
   if (
@@ -61,6 +66,12 @@ profileImageDiv.addEventListener("click", (event) => {
       "user-choice",
       target.id === "profile-images-three"
     );
+    if (target.id === "profile-images-one")
+      chosenImage = profileImgElementOne.src;
+    if (target.id === "profile-images-two")
+      chosenImage = profileImgElementTwo.src;
+    if (target.id === "profile-images-three")
+      chosenImage = profileImgElementThree.src;
   }
 });
 
@@ -87,6 +98,11 @@ registerForm.addEventListener("submit", (event) => {
     if (
       registerPasswordInputElement.value === confirmPasswordInputElement.value
     ) {
+      register(
+        registerUsernameInputElement.value,
+        registerPasswordInputElement.value,
+        chosenImage
+      );
       registerForm.reset();
 
       registerDiv.classList.add("hidden");
