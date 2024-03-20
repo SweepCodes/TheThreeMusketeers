@@ -30,6 +30,11 @@ const profileImgElementThree = document.getElementById(
 const navBar = document.getElementById("nav-bar") as HTMLDivElement;
 const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
 
+const mobileGamesDiv = document.getElementById("mobile-games-forum") as HTMLElement;
+const moviesTVShowsDiv = document.getElementById("movies-tv-shows-foru") as HTMLElement;
+const ESportsDiv = document.getElementById("e-sport-forum") as HTMLElement;
+
+
 logInRegisterPage.addEventListener("click", (event) => {
   if (
     event.target instanceof HTMLElement &&
@@ -101,3 +106,14 @@ registerForm.addEventListener("submit", (event) => {
     alert("Chose profile picture!");
   }
 });
+
+const navbarUl = document.getElementById("nav-ul") as HTMLElement;
+
+navbarUl.addEventListener("click", (event)=>{
+  if(event.target instanceof HTMLElement && event.target.innerText == "Mobile Games"){
+    mobileGamesDiv.classList.remove("hidden");
+    moviesTVShowsDiv.classList.add("hidden")
+    ESportsDiv.classList.add("hidden");
+
+  }
+})
