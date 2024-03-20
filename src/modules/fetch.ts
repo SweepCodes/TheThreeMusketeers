@@ -3,13 +3,15 @@ const baseUrl = `https://musketeerium-default-rtdb.europe-west1.firebasedatabase
 type Users = {
   username: string;
   password: string;
-  profilepic: string;
+  profilePic: string;
 };
+
 export async function getUsers(): Promise<Users> {
   let response = await fetch(baseUrl + "/.json");
   let data = await response.json();
   return data.users as Users;
 }
+
 // export async function getComments() {
 //   let response = await fetch(baseUrl + "/.json");
 //   let data = await response.json();
@@ -21,13 +23,10 @@ export async function getUsers(): Promise<Users> {
 //   }
 //   return data;
 // }
-export async function register(
-  username: string,
-  password: string,
-  profilepic: string
-) {
+
+export async function register(username: string, password: string, profilePic: string): Promise<Users> {
   const url = baseUrl + "/users/.json";
-  let userInfo = { username, password, profilepic };
+  let userInfo = { username, password, profilePic };
 
   const requestOptions = {
     method: "POST",
@@ -37,17 +36,14 @@ export async function register(
 
   let response = await fetch(url, requestOptions);
   let data = await response.json();
-  console.log(data);
+
+  return data as Users
 }
 
-export async function loginChecker(
-  user: string,
-  pass: string
-): Promise<boolean> {
+export async function loginChecker(user: string, pass: string): Promise<boolean> {
   const users = await getUsers();
   for (const key in users) {
     const currentUser = users[key];
-    
     if (currentUser.username === user && currentUser.password === pass)
       return true;
   }

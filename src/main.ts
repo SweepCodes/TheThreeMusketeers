@@ -1,59 +1,32 @@
-import { clearUserProfilePicChoice } from "./modules/utilities.ts";
+import { applyProfilePic, clearUserProfilePicChoice } from "./modules/utilities.ts";
 import { getUsers, register, loginChecker } from "./modules/fetch.ts";
-const logInRegisterPage = document.getElementById(
-  "log-in-register-page"
-) as HTMLDivElement;
+
+const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
 const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
 const logInForm = document.getElementById("log-in-form") as HTMLFormElement;
-const logInUserInput = document.getElementById(
-  "log-in-username"
-) as HTMLInputElement;
-const logInPasswordInput = document.getElementById(
-  "log-in-password"
-) as HTMLInputElement;
+const logInUserInputElement = document.getElementById("log-in-username") as HTMLInputElement;
+const logInPasswordInputElement = document.getElementById("log-in-password") as HTMLInputElement;
 const registerDiv = document.getElementById("register-div") as HTMLDivElement;
-const registerForm = document.getElementById(
-  "register-form"
-) as HTMLFormElement;
-const registerUsernameInputElement = document.getElementById(
-  "register-username"
-) as HTMLInputElement;
-const registerPasswordInputElement = document.getElementById(
-  "register-password"
-) as HTMLInputElement;
-const confirmPasswordInputElement = document.getElementById(
-  "confirm-password"
-) as HTMLInputElement;
-const profileImageDiv = document.getElementById(
-  "profile-images-div"
-) as HTMLDivElement;
-const profileImgElementOne = document.getElementById(
-  "profile-images-one"
-) as HTMLImageElement;
-const profileImgElementTwo = document.getElementById(
-  "profile-images-two"
-) as HTMLImageElement;
-const profileImgElementThree = document.getElementById(
-  "profile-images-three"
-) as HTMLImageElement;
+const registerForm = document.getElementById("register-form") as HTMLFormElement;
+const registerUsernameInputElement = document.getElementById("register-username") as HTMLInputElement;
+const registerPasswordInputElement = document.getElementById("register-password") as HTMLInputElement;
+const confirmPasswordInputElement = document.getElementById("confirm-password") as HTMLInputElement;
+const profileImageDiv = document.getElementById("profile-images-div") as HTMLDivElement;
+const profileImgElementOne = document.getElementById("profile-images-one") as HTMLImageElement;
+const profileImgElementTwo = document.getElementById("profile-images-two") as HTMLImageElement;
+const profileImgElementThree = document.getElementById("profile-images-three") as HTMLImageElement;
 const navBar = document.getElementById("nav-bar") as HTMLDivElement;
+const loggedInProfilePic = document.getElementById("logged-in-profile-pic") as HTMLImageElement;
 const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
 const headerNavbar = document.getElementById("header-bar") as HTMLElement;
-const mobileGamesDiv = document.getElementById(
-  "mobile-games-forum"
-) as HTMLElement;
-const moviesTVShowsDiv = document.getElementById(
-  "movies-tv-shows-forum"
-) as HTMLElement;
+const mobileGamesDiv = document.getElementById("mobile-games-forum") as HTMLElement;
+const moviesTVShowsDiv = document.getElementById("movies-tv-shows-forum") as HTMLElement;
 const eSportsDiv = document.getElementById("e-sport-forum") as HTMLElement;
 
 let chosenImage: string;
 
 logInRegisterPage.addEventListener("click", (event) => {
-  if (
-    event.target instanceof HTMLElement &&
-    event.target.classList.contains("toggle-pages")
-  ) {
+  if (event.target instanceof HTMLElement && event.target.classList.contains("toggle-pages")) {
     logInForm.reset();
     registerForm.reset();
 
@@ -61,40 +34,25 @@ logInRegisterPage.addEventListener("click", (event) => {
     registerDiv.classList.toggle("hidden");
 
     clearUserProfilePicChoice();
-  }
+  };
 });
 
 profileImageDiv.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
 
   if (target.id !== "profile-images-div") {
-    profileImgElementOne.classList.toggle(
-      "user-choice",
-      target.id === "profile-images-one"
-    );
-    profileImgElementTwo.classList.toggle(
-      "user-choice",
-      target.id === "profile-images-two"
-    );
-    profileImgElementThree.classList.toggle(
-      "user-choice",
-      target.id === "profile-images-three"
-    );
-    if (target.id === "profile-images-one")
-      chosenImage = profileImgElementOne.src;
-    if (target.id === "profile-images-two")
-      chosenImage = profileImgElementTwo.src;
-    if (target.id === "profile-images-three")
-      chosenImage = profileImgElementThree.src;
-  }
+    profileImgElementOne.classList.toggle("user-choice", target.id === "profile-images-one");
+    profileImgElementTwo.classList.toggle("user-choice", target.id === "profile-images-two");
+    profileImgElementThree.classList.toggle("user-choice", target.id === "profile-images-three");
+    if (target.id === "profile-images-one") chosenImage = profileImgElementOne.src;
+    if (target.id === "profile-images-two") chosenImage = profileImgElementTwo.src;
+    if (target.id === "profile-images-three") chosenImage = profileImgElementThree.src;
+  };
 });
 
 logInForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  let loginCheck = await loginChecker(
-    logInUserInput.value,
-    logInPasswordInput.value
-  );
+  let loginCheck = await loginChecker(logInUserInputElement.value, logInPasswordInputElement.value);
 
   if (loginCheck) {
     logInDiv.classList.add("hidden");
@@ -102,23 +60,16 @@ logInForm.addEventListener("submit", async (event) => {
     homePageDiv.classList.remove("hidden");
 
     clearUserProfilePicChoice();
-  }
+  };
   logInForm.reset();
 });
 
 registerForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  if (
-    profileImgElementOne.classList.contains("user-choice") ||
-    profileImgElementTwo.classList.contains("user-choice") ||
-    profileImgElementThree.classList.contains("user-choice")
-  ) {
-    if (
-      registerPasswordInputElement.value === confirmPasswordInputElement.value
-    ) {
-      register(
-        registerUsernameInputElement.value,registerPasswordInputElement.value, chosenImage);
+  if (profileImgElementOne.classList.contains("user-choice") || profileImgElementTwo.classList.contains("user-choice") || profileImgElementThree.classList.contains("user-choice")) {
+    if (registerPasswordInputElement.value === confirmPasswordInputElement.value) {
+      register(registerUsernameInputElement.value,registerPasswordInputElement.value, chosenImage);
       registerForm.reset();
 
       registerDiv.classList.add("hidden");
@@ -131,10 +82,9 @@ registerForm.addEventListener("submit", (event) => {
     }
   } else {
     alert("Chose profile picture!");
-  }
+  };
 });
 
-// Logik för header/navbar
 headerNavbar.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
   if (target.innerText == "Mobile Games") {
@@ -157,5 +107,5 @@ headerNavbar.addEventListener("click", (event) => {
     eSportsDiv.classList.add("hidden");
     mobileGamesDiv.classList.add("hidden");
     moviesTVShowsDiv.classList.add("hidden");
-  }
+  };
 });
