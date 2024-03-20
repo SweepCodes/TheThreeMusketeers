@@ -27,9 +27,9 @@
         <h2>Log In</h2>
         <form id="log-in-form">
           <label for="log-in-username">Username:</label>
-          <input id="log-in-username" type="text" />
+          <input id="log-in-username" type="text" required />
           <label for="log-in-password">Password:</label>
-          <input id="log-in-password" type="password" />
+          <input id="log-in-password" type="password" required />
           <input type="submit" value="Log In" />
         </form>
         <p>Register account? <span class="toggle-pages">Click here!</span></p>
@@ -39,17 +39,32 @@
         <h2>Register</h2>
         <form id="register-form">
           <h3>Choose Profile Picture:</h3>
-          <div id="profile-pictures-div">
-            <img src="./images/musketeer1.png" alt="musketeer1" />
-            <img src="./images/musketeer2.png" alt="musketeer2" />
-            <img src="./images/musketeer3.png" alt="musketeer3" />
+          <div id="profile-images-div">
+            <img
+              id="profile-images-one"
+              class="circle"
+              src="./images/musketeer1.png"
+              alt="musketeer1"
+            />
+            <img
+              id="profile-images-two"
+              class="circle"
+              src="./images/musketeer2.png"
+              alt="musketeer2"
+            />
+            <img
+              id="profile-images-three"
+              class="circle"
+              src="./images/musketeer3.png"
+              alt="musketeer3"
+            />
           </div>
           <label for="register-username">Username:</label>
-          <input id="register-username" type="text" />
+          <input id="register-username" type="text" required />
           <label for="register-password">Password:</label>
-          <input id="register-password" type="password" />
+          <input id="register-password" type="password" required />
           <label for="confirm-password">Confirm Password:</label>
-          <input id="confirm-password" type="password" />
+          <input id="confirm-password" type="password" required />
           <input type="submit" value="Register" />
         </form>
         <p>
