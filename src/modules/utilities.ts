@@ -1,3 +1,5 @@
+import { Users } from "./fetch.ts";
+
 export function clearUserProfilePicChoice(): void{
   const profileImgElementOne = document.getElementById("profile-images-one") as HTMLImageElement;
   const profileImgElementTwo = document.getElementById("profile-images-two") as HTMLImageElement;
@@ -8,8 +10,14 @@ export function clearUserProfilePicChoice(): void{
   profileImgElementThree.classList.remove("user-choice");
 };
 
-export function applyProfilePic(profilePic: string): void{
+export function applyProfilePic(userObj: Users, usernameInput: HTMLInputElement, passwordInput: HTMLInputElement): void{
   const loggedInProfilePic = document.getElementById("logged-in-profile-pic") as HTMLImageElement;
 
-  loggedInProfilePic.src = profilePic;
+  for (const key in userObj) {
+    const currentUser: Users = userObj[key];
+    if (usernameInput.value === currentUser.username && passwordInput.value === currentUser.password){
+      loggedInProfilePic.src = currentUser.profilepic;
+      loggedInProfilePic.classList.add("circle");
+    };
+  };
 }

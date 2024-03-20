@@ -1,9 +1,9 @@
 const baseUrl = `https://musketeerium-default-rtdb.europe-west1.firebasedatabase.app/`;
 
-type Users = {
+export type Users = {
   username: string;
   password: string;
-  profilePic: string;
+  profilepic: string;
 };
 
 export async function getUsers(): Promise<Users> {
@@ -24,9 +24,9 @@ export async function getUsers(): Promise<Users> {
 //   return data;
 // }
 
-export async function register(username: string, password: string, profilePic: string): Promise<Users> {
+export async function register(username: string, password: string, profilepic: string): Promise<Users> {
   const url = baseUrl + "/users/.json";
-  let userInfo = { username, password, profilePic };
+  let userInfo = { username, password, profilepic };
 
   const requestOptions = {
     method: "POST",

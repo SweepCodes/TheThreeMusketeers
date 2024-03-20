@@ -16,7 +16,6 @@ const profileImgElementOne = document.getElementById("profile-images-one") as HT
 const profileImgElementTwo = document.getElementById("profile-images-two") as HTMLImageElement;
 const profileImgElementThree = document.getElementById("profile-images-three") as HTMLImageElement;
 const navBar = document.getElementById("nav-bar") as HTMLDivElement;
-const loggedInProfilePic = document.getElementById("logged-in-profile-pic") as HTMLImageElement;
 const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
 const headerNavbar = document.getElementById("header-bar") as HTMLElement;
 const mobileGamesDiv = document.getElementById("mobile-games-forum") as HTMLElement;
@@ -44,6 +43,7 @@ profileImageDiv.addEventListener("click", (event) => {
     profileImgElementOne.classList.toggle("user-choice", target.id === "profile-images-one");
     profileImgElementTwo.classList.toggle("user-choice", target.id === "profile-images-two");
     profileImgElementThree.classList.toggle("user-choice", target.id === "profile-images-three");
+
     if (target.id === "profile-images-one") chosenImage = profileImgElementOne.src;
     if (target.id === "profile-images-two") chosenImage = profileImgElementTwo.src;
     if (target.id === "profile-images-three") chosenImage = profileImgElementThree.src;
@@ -58,25 +58,33 @@ logInForm.addEventListener("submit", async (event) => {
     logInDiv.classList.add("hidden");
     navBar.classList.remove("hidden");
     homePageDiv.classList.remove("hidden");
+    
+    const userObj = await getUsers();
+    
+    applyProfilePic(userObj, logInUserInputElement, logInPasswordInputElement)
 
     clearUserProfilePicChoice();
+    logInForm.reset();
   };
-  logInForm.reset();
 });
 
-registerForm.addEventListener("submit", (event) => {
+registerForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   if (profileImgElementOne.classList.contains("user-choice") || profileImgElementTwo.classList.contains("user-choice") || profileImgElementThree.classList.contains("user-choice")) {
     if (registerPasswordInputElement.value === confirmPasswordInputElement.value) {
-      register(registerUsernameInputElement.value,registerPasswordInputElement.value, chosenImage);
-      registerForm.reset();
+      await register(registerUsernameInputElement.value,registerPasswordInputElement.value, chosenImage);
 
       registerDiv.classList.add("hidden");
       navBar.classList.remove("hidden");
       homePageDiv.classList.remove("hidden");
 
+      const userObj = await getUsers()
+
+      applyProfilePic(userObj, registerUsernameInputElement, registerPasswordInputElement)
+
       clearUserProfilePicChoice();
+      registerForm.reset();
     } else {
       alert("Passwords needs to be the same!");
     }

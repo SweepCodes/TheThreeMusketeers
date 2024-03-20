@@ -82,6 +82,12 @@ header #logo {
   height: 50px;
   margin-left: 5px;
 }
+
+#logged-in-profile-pic {
+  width: 60px;
+  background-color: lightgrey;
+}
+
 /* End header CSS */
 
 /* Start footer CSS */
@@ -149,6 +155,7 @@ footer img {
 
 #profile-images-div img {
   width: 100px;
+  background-color: lightgrey;
 }
 
 .circle {
