@@ -107,26 +107,33 @@ registerForm.addEventListener("submit", (event) => {
   }
 });
 
-const navbarUl = document.getElementById("nav-ul") as HTMLElement;
+const headerNavbar = document.getElementById("header-bar") as HTMLElement;
 
-navbarUl.addEventListener("click", (event)=>{
+headerNavbar.addEventListener("click", (event)=>{
   const target = event.target as HTMLElement;
   if(target.innerText == "Mobile Games"){
     mobileGamesDiv.classList.remove("hidden");
     moviesTVShowsDiv.classList.add("hidden")
     eSportsDiv.classList.add("hidden");
-    homePageDiv.classList.add("hidden")
+    homePageDiv.classList.add("hidden");
   }
-  else if(target.innerText == "Mobile Games"){
-    mobileGamesDiv.classList.remove("hidden");
-    moviesTVShowsDiv.classList.add("hidden")
+  else if(target.innerText == "Movies/TV-Shows"){
+    moviesTVShowsDiv.classList.remove("hidden");
+    mobileGamesDiv.classList.add("hidden");
     eSportsDiv.classList.add("hidden");
-    homePageDiv.classList.add("hidden")
+    homePageDiv.classList.add("hidden");
   }
-  else if(target.innerText == "Mobile Games"){
-    mobileGamesDiv.classList.remove("hidden");
-    moviesTVShowsDiv.classList.add("hidden")
+  else if(target.innerText == "E-Sports"){
+    eSportsDiv.classList.remove("hidden");
+    mobileGamesDiv.classList.add("hidden");
+    moviesTVShowsDiv.classList.add("hidden");
+    homePageDiv.classList.add("hidden");
+  }
+  else if(target.id == "logo"){
+    homePageDiv.classList.remove("hidden");
     eSportsDiv.classList.add("hidden");
-    homePageDiv.classList.add("hidden")
+    mobileGamesDiv.classList.add("hidden");
+    moviesTVShowsDiv.classList.add("hidden");
+
   }
 })
