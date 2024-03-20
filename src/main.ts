@@ -29,7 +29,7 @@ const profileImgElementThree = document.getElementById(
 ) as HTMLImageElement;
 const navBar = document.getElementById("nav-bar") as HTMLDivElement;
 const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
-
+const headerNavbar = document.getElementById("header-bar") as HTMLElement;
 const mobileGamesDiv = document.getElementById("mobile-games-forum") as HTMLElement;
 const moviesTVShowsDiv = document.getElementById("movies-tv-shows-forum") as HTMLElement;
 const eSportsDiv = document.getElementById("e-sport-forum") as HTMLElement;
@@ -107,8 +107,7 @@ registerForm.addEventListener("submit", (event) => {
   }
 });
 
-const headerNavbar = document.getElementById("header-bar") as HTMLElement;
-
+// Logik för header/navbar
 headerNavbar.addEventListener("click", (event)=>{
   const target = event.target as HTMLElement;
   if(target.innerText == "Mobile Games"){
