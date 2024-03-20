@@ -111,3 +111,67 @@ footer img{
   margin-right: 10px;
 }
 /* End footer CSS */
+
+
+/* Start log in CSS */
+#log-in-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#log-in-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toggle-pages{
+  color: blue;
+}
+
+.toggle-pages:hover{
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+
+/* End log in CSS */
+
+/* Start register CSS */
+
+#register-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#register-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profile-pictures-div img{
+  width: 100px;
+}
+
+/* Start register CSS */
+
+/* Start homepage CSS */
+
+#welcome-div{
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 2px black;
+  width: 80%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+/* End homepage CSS */
