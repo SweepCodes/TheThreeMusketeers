@@ -47,6 +47,7 @@ export async function loginChecker(
   const users = await getUsers();
   for (const key in users) {
     const currentUser = users[key];
+    
     if (currentUser.username === user && currentUser.password === pass)
       return true;
   }

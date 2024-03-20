@@ -9,7 +9,7 @@ const logInUserInput = document.getElementById(
   "log-in-username"
 ) as HTMLInputElement;
 const logInPasswordInput = document.getElementById(
-  "log-in-username"
+  "log-in-password"
 ) as HTMLInputElement;
 const registerDiv = document.getElementById("register-div") as HTMLDivElement;
 const registerForm = document.getElementById(
@@ -95,7 +95,6 @@ logInForm.addEventListener("submit", async (event) => {
     logInUserInput.value,
     logInPasswordInput.value
   );
-  console.log(loginChecker(logInUserInput.value, logInPasswordInput.value));
 
   if (loginCheck) {
     logInDiv.classList.add("hidden");
@@ -119,10 +118,7 @@ registerForm.addEventListener("submit", (event) => {
       registerPasswordInputElement.value === confirmPasswordInputElement.value
     ) {
       register(
-        registerUsernameInputElement.value,
-        registerPasswordInputElement.value,
-        chosenImage
-      );
+        registerUsernameInputElement.value,registerPasswordInputElement.value, chosenImage);
       registerForm.reset();
 
       registerDiv.classList.add("hidden");
