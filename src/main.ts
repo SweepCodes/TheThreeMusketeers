@@ -33,6 +33,15 @@ const profileImgElementThree = document.getElementById(
 ) as HTMLImageElement;
 const navBar = document.getElementById("nav-bar") as HTMLDivElement;
 const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
+const headerNavbar = document.getElementById("header-bar") as HTMLElement;
+const mobileGamesDiv = document.getElementById(
+  "mobile-games-forum"
+) as HTMLElement;
+const moviesTVShowsDiv = document.getElementById(
+  "movies-tv-shows-forum"
+) as HTMLElement;
+const eSportsDiv = document.getElementById("e-sport-forum") as HTMLElement;
+
 let chosenImage: string;
 
 logInRegisterPage.addEventListener("click", (event) => {
@@ -115,5 +124,31 @@ registerForm.addEventListener("submit", (event) => {
     }
   } else {
     alert("Chose profile picture!");
+  }
+});
+
+// Logik för header/navbar
+headerNavbar.addEventListener("click", (event) => {
+  const target = event.target as HTMLElement;
+  if (target.innerText == "Mobile Games") {
+    mobileGamesDiv.classList.remove("hidden");
+    moviesTVShowsDiv.classList.add("hidden");
+    eSportsDiv.classList.add("hidden");
+    homePageDiv.classList.add("hidden");
+  } else if (target.innerText == "Movies/TV-Shows") {
+    moviesTVShowsDiv.classList.remove("hidden");
+    mobileGamesDiv.classList.add("hidden");
+    eSportsDiv.classList.add("hidden");
+    homePageDiv.classList.add("hidden");
+  } else if (target.innerText == "E-Sports") {
+    eSportsDiv.classList.remove("hidden");
+    mobileGamesDiv.classList.add("hidden");
+    moviesTVShowsDiv.classList.add("hidden");
+    homePageDiv.classList.add("hidden");
+  } else if (target.id == "logo") {
+    homePageDiv.classList.remove("hidden");
+    eSportsDiv.classList.add("hidden");
+    mobileGamesDiv.classList.add("hidden");
+    moviesTVShowsDiv.classList.add("hidden");
   }
 });
