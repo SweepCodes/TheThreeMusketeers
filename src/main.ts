@@ -1,3 +1,7 @@
+import { get } from "./modules/fetch.js";
+
+get();
+
 const logInRegisterPage = document.getElementById(
   "log-in-register-page"
 ) as HTMLDivElement;
@@ -46,7 +50,7 @@ registerForm.addEventListener("submit", (event) => {
   const registerDiv = document.getElementById("register-div") as HTMLDivElement;
   const navBar = document.getElementById("nav-bar") as HTMLDivElement;
   const homePageDiv = document.getElementById("home-page") as HTMLDivElement;
-  
+
   registerDiv.classList.add("hidden");
   navBar.classList.remove("hidden");
   homePageDiv.classList.remove("hidden");

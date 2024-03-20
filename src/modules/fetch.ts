@@ -3,8 +3,27 @@ const baseUrl = `https://musketeerium-default-rtdb.europe-west1.firebasedatabase
 export async function get() {
   let response = await fetch(baseUrl);
   let data = await response.json();
-  console.log(data);
+  for (const key in data) {
+  }
   return data;
+}
+export async function register(
+  username: string,
+  password: string,
+  profilepic: string
+) {
+  const url = baseUrl + "/users/.json";
+  let userInfo = { username, password, profilepic };
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(userInfo),
+  };
+
+  let response = await fetch(url, requestOptions);
+  let data = await response.json();
+  console.log(data);
 }
 
 // export async function loginChecker() {
@@ -25,25 +44,11 @@ export async function get() {
 //     }
 
 //     if (isLoggedIn) {
+//     här ska sidan ändras till home page och tillåta användaren att skriva kommentarer.
 //     } else {
 //       alert("Wrong username or password");
 //     }
 //   }
-
-// export async function register(username, password) {
-//     let loginInfo = { username, password };
-
-//     const requestOptions = {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(loginInfo),
-//     };
-
-//     let response = await fetch(baseUrl, requestOptions);
-//     let data = await response.json();
-//     console.log(data);
-//   }
-
 //   export async function postComment() {
 //     const commentsUrl = ``
 //     let comment = //comment text input queryselect
