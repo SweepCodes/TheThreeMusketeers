@@ -1,4 +1,5 @@
 import { Users, getUsers } from "./fetch.ts";
+import { modifyClassOnElements } from "./utilities.ts";
 
 export function applyProfilePic(userObj: Users, usernameInput: HTMLInputElement, passwordInput: HTMLInputElement): void{
   const loggedInProfilePicImgElement = document.getElementById("logged-in-profile-pic") as HTMLImageElement;
@@ -7,7 +8,7 @@ export function applyProfilePic(userObj: Users, usernameInput: HTMLInputElement,
     const currentUser: Users = userObj[key];
     if (usernameInput.value === currentUser.username && passwordInput.value === currentUser.password){
       loggedInProfilePicImgElement.src = currentUser.profilepic;
-      loggedInProfilePicImgElement.classList.add("circle");
+      modifyClassOnElements("add", "circle", loggedInProfilePicImgElement);
     };
   };
 };
@@ -25,10 +26,10 @@ export async function displayProfilePages(user: string, loggedInUser: string): P
       profilePageImgElement.src = currentUser.profilepic;
       profilePageH2Element.innerText = currentUser.username;
 
-      profilePageImgElement.classList.add("circle");
+      modifyClassOnElements("add", "circle", profilePageImgElement);
       if (user === loggedInUser) {
-        deleteAccountButton.classList.remove("hidden");
-      }
+        modifyClassOnElements("remove", "hidden", deleteAccountButton);
+      };
     };
   };
 };
