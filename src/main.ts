@@ -1,6 +1,6 @@
-import { clearUserProfilePicChoice } from "./modules/utilities.ts";
-import { getUsers, loginChecker, register, registerChecker } from "./modules/fetch.ts";
-import { applyProfilePic, displayProfilePages } from "./modules/display.ts";
+import {clearUserProfilePicChoice, modifyClassOnElements} from "./modules/utilities.ts";
+import {getUsers, loginChecker, register, registerChecker} from "./modules/fetch.ts";
+import {applyProfilePic, displayProfilePages} from "./modules/display.ts";
 
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
 const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
@@ -30,108 +30,105 @@ let loggedInUser: string;
 let selectedUser: string;
 
 logInRegisterPage.addEventListener("click", (event) => {
-  if (event.target instanceof HTMLElement && event.target.classList.contains("toggle-pages")) {
-    logInForm.reset();
-    registerForm.reset();
+    if (event.target instanceof HTMLElement && event.target.classList.contains("toggle-pages")) {
+        logInForm.reset();
+        registerForm.reset();
 
-    logInDiv.classList.toggle("hidden");
-    registerDiv.classList.toggle("hidden");
+        logInDiv.classList.toggle("hidden");
+        registerDiv.classList.toggle("hidden");
 
-    clearUserProfilePicChoice();
-  };
+        clearUserProfilePicChoice();
+    }
 });
 
 profileImageDiv.addEventListener("click", (event) => {
-  const target = event.target as HTMLElement;
+    const target = event.target as HTMLElement;
 
-  if (target.id !== "profile-images-div") {
-    profileImgElementOne.classList.toggle("user-choice", target.id === "profile-images-one");
-    profileImgElementTwo.classList.toggle("user-choice", target.id === "profile-images-two");
-    profileImgElementThree.classList.toggle("user-choice", target.id === "profile-images-three");
+    if (target.id !== "profile-images-div") {
+        profileImgElementOne.classList.toggle("user-choice", target.id === "profile-images-one");
+        profileImgElementTwo.classList.toggle("user-choice", target.id === "profile-images-two");
+        profileImgElementThree.classList.toggle("user-choice", target.id === "profile-images-three");
 
-    if (target.id === "profile-images-one") chosenImage = profileImgElementOne.src;
-    if (target.id === "profile-images-two") chosenImage = profileImgElementTwo.src;
-    if (target.id === "profile-images-three") chosenImage = profileImgElementThree.src;
-  };
+        if (target.id === "profile-images-one") chosenImage = profileImgElementOne.src;
+        if (target.id === "profile-images-two") chosenImage = profileImgElementTwo.src;
+        if (target.id === "profile-images-three") chosenImage = profileImgElementThree.src;
+    }
 });
 
 logInForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  let loginCheck = await loginChecker(logInUserInputElement.value, logInPasswordInputElement.value);
+    event.preventDefault();
+    let loginCheck = await loginChecker(logInUserInputElement.value, logInPasswordInputElement.value);
 
-  if (loginCheck) {
-    loggedInUser = logInUserInputElement.value;
+    if (loginCheck) {
+        loggedInUser = logInUserInputElement.value;
+        modifyClassOnElements("add", "hidden", logInDiv);
+        modifyClassOnElements("remove", "hidden", navBar, homePageDiv);
+        const userObj = await getUsers();
 
-    logInDiv.classList.add("hidden");
-    navBar.classList.remove("hidden");
-    homePageDiv.classList.remove("hidden");
-    
-    const userObj = await getUsers();
-    
-    applyProfilePic(userObj, logInUserInputElement, logInPasswordInputElement)
+        applyProfilePic(userObj, logInUserInputElement, logInPasswordInputElement);
 
-    clearUserProfilePicChoice();
-    logInForm.reset();
-  };
+        clearUserProfilePicChoice();
+        logInForm.reset();
+    }
 });
 
 registerForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  let registerCheck = await registerChecker(registerUsernameInputElement.value, registerPasswordInputElement.value, confirmPasswordInputElement.value)
+    let registerCheck = await registerChecker(registerUsernameInputElement.value, registerPasswordInputElement.value, confirmPasswordInputElement.value);
 
-  if (registerCheck) {
-    await register(registerUsernameInputElement.value,registerPasswordInputElement.value, chosenImage);
+    if (registerCheck) {
+        await register(registerUsernameInputElement.value, registerPasswordInputElement.value, chosenImage);
 
-    loggedInUser = registerUsernameInputElement.value;
+        loggedInUser = registerUsernameInputElement.value;
 
-    registerDiv.classList.add("hidden");
-    navBar.classList.remove("hidden");
-    homePageDiv.classList.remove("hidden");
+        registerDiv.classList.add("hidden");
+        navBar.classList.remove("hidden");
+        homePageDiv.classList.remove("hidden");
 
-    const userObj = await getUsers();
+        const userObj = await getUsers();
 
-    applyProfilePic(userObj, registerUsernameInputElement, registerPasswordInputElement);
+        applyProfilePic(userObj, registerUsernameInputElement, registerPasswordInputElement);
 
-    clearUserProfilePicChoice(); 
-    registerForm.reset();
-  };
+        clearUserProfilePicChoice();
+        registerForm.reset();
+    }
 });
 
 headerNavbar.addEventListener("click", async (event) => {
-  const target = event.target as HTMLElement;
-  if (target.innerText == "Mobile Games") {
-    mobileGamesDiv.classList.remove("hidden");
-    moviesTVShowsDiv.classList.add("hidden");
-    eSportsDiv.classList.add("hidden");
-    homePageDiv.classList.add("hidden");
-    profileDiv.classList.add("hidden");
-    deleteAccountButton.classList.add("hidden");
-  } else if (target.innerText == "Movies/TV-Shows") {
-    moviesTVShowsDiv.classList.remove("hidden");
-    mobileGamesDiv.classList.add("hidden");
-    eSportsDiv.classList.add("hidden");
-    homePageDiv.classList.add("hidden");
-    profileDiv.classList.add("hidden");
-  } else if (target.innerText == "E-Sports") {
-    eSportsDiv.classList.remove("hidden");
-    mobileGamesDiv.classList.add("hidden");
-    moviesTVShowsDiv.classList.add("hidden");
-    homePageDiv.classList.add("hidden");
-    profileDiv.classList.add("hidden");
-  } else if (target.id == "logo" && !navBar.classList.contains("hidden")) {
-    homePageDiv.classList.remove("hidden");
-    eSportsDiv.classList.add("hidden");
-    mobileGamesDiv.classList.add("hidden");
-    moviesTVShowsDiv.classList.add("hidden");
-    profileDiv.classList.add("hidden");
-  } else if (target.id == "logged-in-profile-pic") {
-    profileDiv.classList.remove("hidden");
-    homePageDiv.classList.add("hidden");
-    eSportsDiv.classList.add("hidden");
-    mobileGamesDiv.classList.add("hidden");
-    moviesTVShowsDiv.classList.add("hidden");
+    const target = event.target as HTMLElement;
+    if (target.innerText == "Mobile Games") {
+        mobileGamesDiv.classList.remove("hidden");
+        moviesTVShowsDiv.classList.add("hidden");
+        eSportsDiv.classList.add("hidden");
+        homePageDiv.classList.add("hidden");
+        profileDiv.classList.add("hidden");
+        deleteAccountButton.classList.add("hidden");
+    } else if (target.innerText == "Movies/TV-Shows") {
+        moviesTVShowsDiv.classList.remove("hidden");
+        mobileGamesDiv.classList.add("hidden");
+        eSportsDiv.classList.add("hidden");
+        homePageDiv.classList.add("hidden");
+        profileDiv.classList.add("hidden");
+    } else if (target.innerText == "E-Sports") {
+        eSportsDiv.classList.remove("hidden");
+        mobileGamesDiv.classList.add("hidden");
+        moviesTVShowsDiv.classList.add("hidden");
+        homePageDiv.classList.add("hidden");
+        profileDiv.classList.add("hidden");
+    } else if (target.id == "logo" && !navBar.classList.contains("hidden")) {
+        homePageDiv.classList.remove("hidden");
+        eSportsDiv.classList.add("hidden");
+        mobileGamesDiv.classList.add("hidden");
+        moviesTVShowsDiv.classList.add("hidden");
+        profileDiv.classList.add("hidden");
+    } else if (target.id == "logged-in-profile-pic") {
+        profileDiv.classList.remove("hidden");
+        homePageDiv.classList.add("hidden");
+        eSportsDiv.classList.add("hidden");
+        mobileGamesDiv.classList.add("hidden");
+        moviesTVShowsDiv.classList.add("hidden");
 
-    await displayProfilePages(loggedInUser, loggedInUser);
-  };
+        await displayProfilePages(loggedInUser, loggedInUser);
+    }
 });
