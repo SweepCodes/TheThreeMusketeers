@@ -1,5 +1,5 @@
-import {clearUserProfilePicChoice, modifyClassOnElements} from "./modules/utilities.ts";
-import {getUsers, loginChecker, register, registerChecker} from "./modules/fetch.ts";
+import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements} from "./modules/utilities.ts";
+import {getUsers, register} from "./modules/fetch.ts";
 import {applyProfilePic, displayProfilePages} from "./modules/display.ts";
 
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
@@ -83,9 +83,7 @@ registerForm.addEventListener("submit", async (event) => {
 
         loggedInUser = registerUsernameInputElement.value;
 
-        registerDiv.classList.add("hidden");
-        navBar.classList.remove("hidden");
-        homePageDiv.classList.remove("hidden");
+        modifyClassOnElements("remove", "hidden", registerDiv, navBar, homePageDiv);
 
         const userObj = await getUsers();
 
@@ -99,67 +97,87 @@ registerForm.addEventListener("submit", async (event) => {
 headerNavbar.addEventListener("click", async (event) => {
     const target = event.target as HTMLElement;
     if (target.innerText == "Mobile Games") {
-        mobileGamesDiv.classList.remove("hidden");
-        moviesTVShowsDiv.classList.add("hidden");
-        eSportsDiv.classList.add("hidden");
-        homePageDiv.classList.add("hidden");
-        profileDiv.classList.add("hidden");
+        modifyClassOnElements("remove", "hidden", mobileGamesDiv);
+        modifyClassOnElements("add", "hidden", moviesTVShowsDiv, eSportsDiv, homePageDiv, profileDiv);
+        // mobileGamesDiv.classList.remove("hidden");
+        // moviesTVShowsDiv.classList.add("hidden");
+        // eSportsDiv.classList.add("hidden");
+        // homePageDiv.classList.add("hidden");
+        // profileDiv.classList.add("hidden");
     } else if (target.innerText == "Movies/TV-Shows") {
-        moviesTVShowsDiv.classList.remove("hidden");
-        mobileGamesDiv.classList.add("hidden");
-        eSportsDiv.classList.add("hidden");
-        homePageDiv.classList.add("hidden");
-        profileDiv.classList.add("hidden");
+        modifyClassOnElements("remove", "hidden", moviesTVShowsDiv);
+        modifyClassOnElements("add", "hidden", mobileGamesDiv, eSportsDiv, homePageDiv, profileDiv);
+        // moviesTVShowsDiv.classList.remove("hidden");
+        // mobileGamesDiv.classList.add("hidden");
+        // eSportsDiv.classList.add("hidden");
+        // homePageDiv.classList.add("hidden");
+        // profileDiv.classList.add("hidden");
     } else if (target.innerText == "E-Sports") {
-        eSportsDiv.classList.remove("hidden");
-        mobileGamesDiv.classList.add("hidden");
-        moviesTVShowsDiv.classList.add("hidden");
-        homePageDiv.classList.add("hidden");
-        profileDiv.classList.add("hidden");
+        modifyClassOnElements("remove", "hidden", eSportsDiv);
+        modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, homePageDiv, profileDiv);
+        // eSportsDiv.classList.remove("hidden");
+        // mobileGamesDiv.classList.add("hidden");
+        // moviesTVShowsDiv.classList.add("hidden");
+        // homePageDiv.classList.add("hidden");
+        // profileDiv.classList.add("hidden");
     } else if (target.id == "logo" && !navBar.classList.contains("hidden")) {
-        homePageDiv.classList.remove("hidden");
-        eSportsDiv.classList.add("hidden");
-        mobileGamesDiv.classList.add("hidden");
-        moviesTVShowsDiv.classList.add("hidden");
-        profileDiv.classList.add("hidden");
+        modifyClassOnElements("remove", "hidden", homePageDiv);
+        modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, eSportsDiv, profileDiv);
+        // homePageDiv.classList.remove("hidden");
+        // eSportsDiv.classList.add("hidden");
+        // mobileGamesDiv.classList.add("hidden");
+        // moviesTVShowsDiv.classList.add("hidden");
+        // profileDiv.classList.add("hidden");
     } else if (target.id == "logged-in-profile-pic") {
-        profileDiv.classList.remove("hidden");
-        homePageDiv.classList.add("hidden");
-        eSportsDiv.classList.add("hidden");
-        mobileGamesDiv.classList.add("hidden");
-        moviesTVShowsDiv.classList.add("hidden");
+        modifyClassOnElements("remove", "hidden", profileDiv);
+        modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
+        // profileDiv.classList.remove("hidden");
+        // homePageDiv.classList.add("hidden");
+        // eSportsDiv.classList.add("hidden");
+        // mobileGamesDiv.classList.add("hidden");
+        // moviesTVShowsDiv.classList.add("hidden");
         const target = event.target as HTMLElement;
         if (target.innerText == "Mobile Games") {
-            mobileGamesDiv.classList.remove("hidden");
-            moviesTVShowsDiv.classList.add("hidden");
-            eSportsDiv.classList.add("hidden");
-            homePageDiv.classList.add("hidden");
-            profileDiv.classList.add("hidden");
-            deleteAccountButton.classList.add("hidden");
+            modifyClassOnElements("remove", "hidden", mobileGamesDiv);
+            modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, deleteAccountButton);
+            // mobileGamesDiv.classList.remove("hidden");
+            // moviesTVShowsDiv.classList.add("hidden");
+            // eSportsDiv.classList.add("hidden");
+            // homePageDiv.classList.add("hidden");
+            // profileDiv.classList.add("hidden");
+            // deleteAccountButton.classList.add("hidden");
         } else if (target.innerText == "Movies/TV-Shows") {
-            moviesTVShowsDiv.classList.remove("hidden");
-            mobileGamesDiv.classList.add("hidden");
-            eSportsDiv.classList.add("hidden");
-            homePageDiv.classList.add("hidden");
-            profileDiv.classList.add("hidden");
+            modifyClassOnElements("remove", "hidden", mobileGamesDiv, moviesTVShowsDiv);
+            modifyClassOnElements("add", "hidden", profileDiv, homePageDiv, eSportsDiv, mobileGamesDiv);
+            // moviesTVShowsDiv.classList.remove("hidden");
+            // mobileGamesDiv.classList.add("hidden");
+            // eSportsDiv.classList.add("hidden");
+            // homePageDiv.classList.add("hidden");
+            // profileDiv.classList.add("hidden");
         } else if (target.innerText == "E-Sports") {
-            eSportsDiv.classList.remove("hidden");
-            mobileGamesDiv.classList.add("hidden");
-            moviesTVShowsDiv.classList.add("hidden");
-            homePageDiv.classList.add("hidden");
-            profileDiv.classList.add("hidden");
+            modifyClassOnElements("remove", "hidden", eSportsDiv);
+            modifyClassOnElements("add", "hidden", profileDiv, homePageDiv, moviesTVShowsDiv, mobileGamesDiv);
+            // eSportsDiv.classList.remove("hidden");
+            // mobileGamesDiv.classList.add("hidden");
+            // moviesTVShowsDiv.classList.add("hidden");
+            // homePageDiv.classList.add("hidden");
+            // profileDiv.classList.add("hidden");
         } else if (target.id == "logo" && !navBar.classList.contains("hidden")) {
-            homePageDiv.classList.remove("hidden");
-            eSportsDiv.classList.add("hidden");
-            mobileGamesDiv.classList.add("hidden");
-            moviesTVShowsDiv.classList.add("hidden");
-            profileDiv.classList.add("hidden");
+            modifyClassOnElements("remove", "hidden", homePageDiv);
+            modifyClassOnElements("add", "hidden", profileDiv, eSportsDiv, moviesTVShowsDiv, mobileGamesDiv);
+            // homePageDiv.classList.remove("hidden");
+            // eSportsDiv.classList.add("hidden");
+            // mobileGamesDiv.classList.add("hidden");
+            // moviesTVShowsDiv.classList.add("hidden");
+            // profileDiv.classList.add("hidden");
         } else if (target.id == "logged-in-profile-pic") {
-            profileDiv.classList.remove("hidden");
-            homePageDiv.classList.add("hidden");
-            eSportsDiv.classList.add("hidden");
-            mobileGamesDiv.classList.add("hidden");
-            moviesTVShowsDiv.classList.add("hidden");
+            modifyClassOnElements("remove", "hidden", profileDiv);
+            modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
+            // profileDiv.classList.remove("hidden");
+            // homePageDiv.classList.add("hidden");
+            // eSportsDiv.classList.add("hidden");
+            // mobileGamesDiv.classList.add("hidden");
+            // moviesTVShowsDiv.classList.add("hidden");
 
             await displayProfilePages(loggedInUser, loggedInUser);
         }
