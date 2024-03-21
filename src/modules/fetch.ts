@@ -44,12 +44,39 @@ export async function loginChecker(user: string, pass: string): Promise<boolean>
   const users = await getUsers();
   for (const key in users) {
     const currentUser = users[key];
-    if (currentUser.username === user && currentUser.password === pass)
-      return true;
-  }
-  alert("Wrong username or password");
+    if (currentUser.username === user && currentUser.password === pass) return true;
+  };
+  alert("Wrong username or password!");
   return false;
 }
+
+export async function registerChecker(user: string, password: string, confirmPassword: string): Promise<boolean>{
+  const profileImgElementOne = document.getElementById("profile-images-one") as HTMLImageElement;
+  const profileImgElementTwo = document.getElementById("profile-images-two") as HTMLImageElement;
+  const profileImgElementThree = document.getElementById("profile-images-three") as HTMLImageElement;
+
+  const users = await getUsers();
+  
+  if (profileImgElementOne.classList.contains("user-choice") || profileImgElementTwo.classList.contains("user-choice") || profileImgElementThree.classList.contains("user-choice")) {
+    for (const key in users) {
+      const currentUser = users[key];
+      if (currentUser.username === user) {
+        alert("Username already exists!");
+        return false;
+      };
+    };
+    if (password === confirmPassword) {
+      return true;
+    } else {
+      alert("Passwords needs to be the same!");
+      return false;
+    };
+  } else {
+    alert("Chose profile picture!");
+    return false;
+  };
+};
+
 //   export async function postComment() {
 //     const commentsUrl = ``
 //     let comment = //comment text input queryselect
