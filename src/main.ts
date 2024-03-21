@@ -24,6 +24,7 @@ const moviesTVShowsDiv = document.getElementById("movies-tv-shows-forum") as HTM
 const eSportsDiv = document.getElementById("e-sport-forum") as HTMLDivElement;
 const profileDiv = document.getElementById("profile-page") as HTMLDivElement;
 const deleteAccountButton = document.getElementById("delete-button") as HTMLButtonElement;
+const logOutButton = document.getElementById("log-out-button")as HTMLButtonElement;
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -78,7 +79,7 @@ logInForm.addEventListener("submit", async (event) => {
 registerForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  let registerCheck = await registerChecker(registerUsernameInputElement.value, registerPasswordInputElement.value, confirmPasswordInputElement.value)
+  let registerCheck = await registerChecker(registerUsernameInputElement.value, registerPasswordInputElement.value, confirmPasswordInputElement.value);
 
   if (registerCheck) {
     await register(registerUsernameInputElement.value,registerPasswordInputElement.value, chosenImage);
@@ -106,7 +107,6 @@ headerNavbar.addEventListener("click", async (event) => {
     eSportsDiv.classList.add("hidden");
     homePageDiv.classList.add("hidden");
     profileDiv.classList.add("hidden");
-    deleteAccountButton.classList.add("hidden");
   } else if (target.innerText == "Movies/TV-Shows") {
     moviesTVShowsDiv.classList.remove("hidden");
     mobileGamesDiv.classList.add("hidden");
@@ -135,3 +135,14 @@ headerNavbar.addEventListener("click", async (event) => {
     await displayProfilePages(loggedInUser, loggedInUser);
   };
 });
+
+logOutButton.addEventListener("click", (event) => {
+  logInDiv.classList.remove("hidden");
+  deleteAccountButton.classList.add("hidden");
+  navBar.classList.add("hidden");
+  homePageDiv.classList.add("hidden");
+  eSportsDiv.classList.add("hidden");
+  mobileGamesDiv.classList.add("hidden");
+  moviesTVShowsDiv.classList.add("hidden");
+  profileDiv.classList.add("hidden")
+})

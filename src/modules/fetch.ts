@@ -48,7 +48,7 @@ export async function loginChecker(user: string, pass: string): Promise<boolean>
   };
   alert("Wrong username or password!");
   return false;
-}
+};
 
 export async function registerChecker(user: string, password: string, confirmPassword: string): Promise<boolean>{
   const profileImgElementOne = document.getElementById("profile-images-one") as HTMLImageElement;
