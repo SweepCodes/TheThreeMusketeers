@@ -20,7 +20,7 @@ export async function displayProfilePages(user: string, loggedInUser: string): P
   const users = await getUsers();
 
   for (const key in users) {
-    const currentUser = users[key];
+    const currentUser: Users = users[key];
     if (currentUser.username === user) {
       profilePageImgElement.src = currentUser.profilepic;
       profilePageH2Element.innerText = currentUser.username;
