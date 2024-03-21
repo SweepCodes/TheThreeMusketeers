@@ -13,7 +13,6 @@ export function applyProfilePic(userObj: Users, usernameInput: HTMLInputElement,
 };
 
 export async function displayProfilePages(user: string, loggedInUser: string): Promise<void> {
-  console.log('WIP');
   const profilePageImgElement = document.getElementById("profile-page-profile-picture") as HTMLImageElement;
   const profilePageH2Element = document.getElementById("profile-page-username") as HTMLHeadingElement;
   const deleteAccountButton = document.getElementById("delete-button") as HTMLButtonElement;
