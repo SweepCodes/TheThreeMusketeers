@@ -43,12 +43,12 @@ export async function register(username: string, password: string, profilepic: s
 export async function loginChecker(user: string, pass: string): Promise<boolean> {
   const users = await getUsers();
   for (const key in users) {
-    const currentUser = users[key];
+    const currentUser: Users = users[key];
     if (currentUser.username === user && currentUser.password === pass) return true;
   };
   alert("Wrong username or password!");
   return false;
-}
+};
 
 export async function registerChecker(user: string, password: string, confirmPassword: string): Promise<boolean>{
   const profileImgElementOne = document.getElementById("profile-images-one") as HTMLImageElement;
@@ -59,7 +59,7 @@ export async function registerChecker(user: string, password: string, confirmPas
   
   if (profileImgElementOne.classList.contains("user-choice") || profileImgElementTwo.classList.contains("user-choice") || profileImgElementThree.classList.contains("user-choice")) {
     for (const key in users) {
-      const currentUser = users[key];
+      const currentUser: Users = users[key];
       if (currentUser.username === user) {
         alert("Username already exists!");
         return false;
