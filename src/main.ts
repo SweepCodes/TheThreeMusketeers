@@ -114,7 +114,7 @@ headerNavbar.addEventListener("click", async (event) => {
     };
 });
 
-logOutButton.addEventListener("click", (event) => {
+logOutButton.addEventListener("click", () => {
   modifyClassOnElements("remove", "hidden", logInDiv);
   modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv);
 });
