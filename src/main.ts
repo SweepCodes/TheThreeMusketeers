@@ -82,10 +82,8 @@ registerForm.addEventListener("submit", async (event) => {
         await register(registerUsernameInputElement.value, registerPasswordInputElement.value, chosenImage);
 
         loggedInUser = registerUsernameInputElement.value;
-
         modifyClassOnElements("remove", "hidden", navBar, homePageDiv);
         modifyClassOnElements("add", "hidden", registerDiv);
-
         const userObj = await getUsers();
 
         applyProfilePic(userObj, registerUsernameInputElement, registerPasswordInputElement);
