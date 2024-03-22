@@ -6,23 +6,23 @@ export type Users = {
     profilepic: string;
 };
 
+export type Comments = {
+    category: "esport" | "mobilegames" | "movies/tvshows";
+    context: string;
+    userid: string;
+};
+
 export async function getUsers(): Promise<Users> {
     let response = await fetch(baseUrl + "/.json");
     let data = await response.json();
     return data.users as Users;
-}
+};
 
-// export async function getComments() {
-//   let response = await fetch(baseUrl + "/.json");
-//   let data = await response.json();
-//   for (const key in data.comments) {
-//     console.log(data.comments[key].category);
-//     console.log(data.comments[key].username);
-//     console.log(data.comments[key].image);
-//     console.log(data.comments[key].context);
-//   }
-//   return data;
-// }
+export async function getComments(): Promise<Comments> {
+    let response = await fetch(baseUrl + "/.json");
+    let data = await response.json();
+    return data.comments as Comments;
+};
 
 export async function register(username: string, password: string, profilepic: string): Promise<Users> {
     const url = baseUrl + "/users/.json";
