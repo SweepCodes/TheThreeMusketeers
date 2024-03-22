@@ -38,6 +38,23 @@ export async function register(username: string, password: string, profilepic: s
     let data = await response.json();
 
     return data as Users;
+    
+}
+
+
+export async function deleteUser(userId: string ):Promise <void>{
+    const url = baseUrl + "/users/" + userId + "/.json";    
+
+    const requestOptions = {
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(userId),
+    };
+
+    let response = await fetch(url, requestOptions);
+    let data = await response.json();
+
+    return data as void;
 }
 //   export async function postComment() {
 //     const commentsUrl = ``

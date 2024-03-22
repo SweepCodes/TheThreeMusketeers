@@ -1,5 +1,5 @@
 import { clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements } from "./modules/utilities.ts";
-import { getUsers, register } from "./modules/fetch.ts";
+import { getUsers, register, deleteUser } from "./modules/fetch.ts";
 import { applyProfilePic, displayProfilePages } from "./modules/display.ts";
 
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
@@ -120,3 +120,17 @@ logOutButton.addEventListener("click", (event) => {
   modifyClassOnElements("remove", "hidden", logInDiv);
   modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv);
 });
+
+////// Delete user////////////
+
+deleteAccountButton.addEventListener("click", async ()=>{
+    const userObj = await getUsers();
+
+    for(const key in userObj){
+        if(userObj[key].username === loggedInUser){
+             await deleteUser(key)
+        }   
+    }
+    modifyClassOnElements("remove", "hidden", logInDiv);
+    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv);  
+})
