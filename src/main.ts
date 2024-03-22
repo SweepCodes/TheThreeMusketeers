@@ -83,7 +83,8 @@ registerForm.addEventListener("submit", async (event) => {
 
         loggedInUser = registerUsernameInputElement.value;
 
-        modifyClassOnElements("remove", "hidden", registerDiv, navBar, homePageDiv);
+        modifyClassOnElements("remove", "hidden", navBar, homePageDiv);
+        modifyClassOnElements("add", "hidden", registerDiv);
 
         const userObj = await getUsers();
 
