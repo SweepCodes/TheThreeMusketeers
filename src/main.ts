@@ -1,6 +1,6 @@
-import { clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements } from "./modules/utilities.ts";
-import { getUsers, register, deleteUser } from "./modules/fetch.ts";
-import { applyProfilePic, displayProfilePages } from "./modules/display.ts";
+import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements} from "./modules/utilities.ts";
+import {getUsers, register, deleteUser} from "./modules/fetch.ts";
+import {applyProfilePic, displayProfilePages} from "./modules/display.ts";
 
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
 const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
@@ -112,24 +112,24 @@ headerNavbar.addEventListener("click", async (event) => {
         modifyClassOnElements("remove", "hidden", profileDiv);
         modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
         displayProfilePages(loggedInUser, loggedInUser);
-    };
+    }
 });
 
 logOutButton.addEventListener("click", () => {
-  modifyClassOnElements("remove", "hidden", logInDiv);
-  modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
+    modifyClassOnElements("remove", "hidden", logInDiv);
+    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
 });
 
 ////// Delete user////////////
 
-deleteAccountButton.addEventListener("click", async ()=>{
+deleteAccountButton.addEventListener("click", async () => {
     const userObj = await getUsers();
 
-    for(const key in userObj){
-        if(userObj[key].username === loggedInUser){
-             await deleteUser(key)
-        }   
+    for (const key in userObj) {
+        if (userObj[key].username === loggedInUser) {
+            await deleteUser(key);
+        }
     }
     modifyClassOnElements("remove", "hidden", logInDiv);
-    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);  
-})
+    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
+});
