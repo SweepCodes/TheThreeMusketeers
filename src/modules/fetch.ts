@@ -7,7 +7,7 @@ export type Users = {
 };
 
 export type Comments = {
-    category: "esport" | "mobilegames" | "movies/tvshows";
+    category: "E-Sports" | "Mobile Games" | "Movies/TV-Shows";
     context: string;
     userid: string;
     username: string;

@@ -1,5 +1,5 @@
 import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements} from "./modules/utilities.ts";
-import {getUsers, register, deleteUser} from "./modules/fetch.ts";
+import {getUsers, register, deleteUser, postComment} from "./modules/fetch.ts";
 import {applyProfilePic, displayProfilePages} from "./modules/display.ts";
 
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
@@ -26,6 +26,9 @@ const profileDiv = document.getElementById("profile-page") as HTMLDivElement;
 const deleteAccountButton = document.getElementById("delete-button") as HTMLButtonElement;
 const logOutButton = document.getElementById("log-out-button") as HTMLButtonElement;
 const asideDiv = document.querySelector("aside") as HTMLDivElement;
+const esportsCommentForm = document.querySelector("#esports-form") as HTMLFormElement;
+const categoryEsports = document.querySelector("#esports-title") as HTMLLIElement;
+const esportCommentInput = document.querySelector("#e-sports-comment") as HTMLInputElement;
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -131,19 +134,31 @@ deleteAccountButton.addEventListener("click", async () => {
         }
     }
     modifyClassOnElements("remove", "hidden", logInDiv);
-    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);  
-})
+    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
+});
 
 ////// display aside//////////
-async function displayUsersInAside(){
-    const users = await getUsers()
-    for(const key in users){
+async function displayUsersInAside() {
+    const users = await getUsers();
+    for (const key in users) {
         console.log(users[key].username);
         const userElP = document.createElement("p");
         userElP.innerText = users[key].username;
-        
-        asideDiv.append(userElP)
-      }
-};
+
+        asideDiv.append(userElP);
+    }
+}
 
 displayUsersInAside();
+
+esportsCommentForm.addEventListener("submit", commentHandler);
+
+async function commentHandler() {
+    console.log(categoryEsports.innerText);
+    console.log(esportCommentInput.value);
+    const users = getUsers();
+    for (const key in users) {
+        console.log(key);
+    }
+    console.log();
+}
