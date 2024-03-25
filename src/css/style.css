@@ -171,10 +171,9 @@ footer img {
 /* End register CSS */
 
 /* Start maincontainer CSS */
-#main-container{
+#main-container {
   display: flex;
   justify-content: space-around;
-  
 }
 
 /* End maincontainer CSS */
@@ -195,7 +194,6 @@ footer img {
 }
 /* End homepage CSS */
 
-
 /* Start profilepage CSS */
 
 #profile-page-profile-picture {
@@ -207,7 +205,7 @@ footer img {
 
 /* Start aside CSS */
 
-aside{
+aside {
   border: solid 2px rgb(255, 0, 238);
   width: 100px;
   height: 400px;
@@ -215,3 +213,14 @@ aside{
 
 /* End aside CSS */
 
+/* Start Forums CSS */
+
+.forum-container {
+  background-color: whitesmoke;
+  border: solid 2px black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+/* End Forums CSS */
