@@ -33,6 +33,7 @@ const esportCommentInput = document.querySelector("#e-sports-comment") as HTMLIn
 let chosenImage: string;
 let loggedInUser: string;
 let selectedUser: string;
+let userId: string;
 
 logInRegisterPage.addEventListener("click", (event) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains("toggle-pages")) {
@@ -160,7 +161,6 @@ deleteAccountButton.addEventListener("click", async () => {
 async function displayUsersInAside() {
     const users = await getUsers();
     for (const key in users) {
-        console.log(users[key].username);
         const userElP = document.createElement("p");
         userElP.innerText = users[key].username;
 
@@ -172,12 +172,15 @@ displayUsersInAside();
 
 esportsCommentForm.addEventListener("submit", commentHandler);
 
-async function commentHandler() {
-    console.log(categoryEsports.innerText);
-    console.log(esportCommentInput.value);
-    const users = getUsers();
+async function commentHandler(event) {
+    event.preventDefault();
+    const category = categoryEsports.innerText;
+    const context = esportCommentInput.value;
+    const username = loggedInUser;
+
+    const users = await getUsers();
     for (const key in users) {
-        console.log(key);
+        if (users[key].username === loggedInUser) userId = key;
+        await postComment(userId, category, context, username);
     }
-    console.log();
 }
