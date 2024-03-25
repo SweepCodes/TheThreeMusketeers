@@ -29,6 +29,7 @@ const asideDiv = document.querySelector("aside") as HTMLDivElement;
 
 let chosenImage: string;
 let loggedInUser: string;
+let selectedUser: string
 
 logInRegisterPage.addEventListener("click", (event) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains("toggle-pages")) {
@@ -128,11 +129,12 @@ headerNavbar.addEventListener("click", async (event) => {
 logOutButton.addEventListener("click", () => {
     modifyClassOnElements("remove", "hidden", logInDiv);
     modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
+    asideDiv.innerHTML = "";
 });
 
 asideDiv.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
-    let selectedUser = target.innerText;
+    selectedUser = target.innerText;
     modifyClassOnElements("remove", "hidden", profileDiv);
     modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
     displayProfilePages(selectedUser, loggedInUser);
