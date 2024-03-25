@@ -160,7 +160,7 @@ deleteAccountButton.addEventListener("click", async () => {
 
 esportsCommentForm.addEventListener("submit", commentHandler);
 
-async function commentHandler(event) {
+async function commentHandler(event: SubmitEvent): Promise<void> {
     event.preventDefault();
     const category = categoryEsports.innerText;
     const context = esportCommentInput.value;
@@ -168,7 +168,10 @@ async function commentHandler(event) {
 
     const users = await getUsers();
     for (const key in users) {
-        if (users[key].username === loggedInUser) userId = key;
-        await postComment(userId, category, context, username);
-    }
-}
+        if (users[key].username === loggedInUser) {
+            userId = key;
+            await postComment(userId, category, context, username);
+        };
+    };
+    esportCommentInput.value = "";
+};
