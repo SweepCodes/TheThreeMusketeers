@@ -170,6 +170,15 @@ footer img {
 
 /* End register CSS */
 
+/* Start maincontainer CSS */
+#main-container{
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+/* End maincontainer CSS */
+
 /* Start homepage CSS */
 
 #welcome-div {
@@ -186,7 +195,23 @@ footer img {
 }
 /* End homepage CSS */
 
+
+/* Start profilepage CSS */
+
 #profile-page-profile-picture {
   width: 150px;
   background-color: lightgrey;
 }
+
+/* End profilepage CSS */
+
+/* Start aside CSS */
+
+aside{
+  border: solid 2px rgb(255, 0, 238);
+  width: 100px;
+  height: 400px;
+}
+
+/* End aside CSS */
+

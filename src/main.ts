@@ -25,6 +25,7 @@ const eSportsDiv = document.getElementById("e-sport-forum") as HTMLDivElement;
 const profileDiv = document.getElementById("profile-page") as HTMLDivElement;
 const deleteAccountButton = document.getElementById("delete-button") as HTMLButtonElement;
 const logOutButton = document.getElementById("log-out-button") as HTMLButtonElement;
+const asideDiv = document.querySelector("aside") as HTMLDivElement;
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -63,7 +64,7 @@ logInForm.addEventListener("submit", async (event) => {
     if (loginCheck) {
         loggedInUser = logInUserInputElement.value;
         modifyClassOnElements("add", "hidden", logInDiv);
-        modifyClassOnElements("remove", "hidden", navBar, homePageDiv);
+        modifyClassOnElements("remove", "hidden", navBar, homePageDiv, asideDiv);
         const userObj = await getUsers();
 
         applyProfilePic(userObj, logInUserInputElement, logInPasswordInputElement);
@@ -82,7 +83,7 @@ registerForm.addEventListener("submit", async (event) => {
         await register(registerUsernameInputElement.value, registerPasswordInputElement.value, chosenImage);
 
         loggedInUser = registerUsernameInputElement.value;
-        modifyClassOnElements("remove", "hidden", navBar, homePageDiv);
+        modifyClassOnElements("remove", "hidden", navBar, homePageDiv, asideDiv);
         modifyClassOnElements("add", "hidden", registerDiv);
         const userObj = await getUsers();
 
@@ -116,7 +117,7 @@ headerNavbar.addEventListener("click", async (event) => {
 
 logOutButton.addEventListener("click", () => {
   modifyClassOnElements("remove", "hidden", logInDiv);
-  modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv);
+  modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
 });
 
 ////// Delete user////////////
@@ -130,5 +131,5 @@ deleteAccountButton.addEventListener("click", async ()=>{
         }   
     }
     modifyClassOnElements("remove", "hidden", logInDiv);
-    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv);  
+    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);  
 })
