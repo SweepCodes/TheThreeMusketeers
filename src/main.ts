@@ -29,7 +29,6 @@ const asideDiv = document.querySelector("aside") as HTMLDivElement;
 
 let chosenImage: string;
 let loggedInUser: string;
-let selectedUser: string;
 
 logInRegisterPage.addEventListener("click", (event) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains("toggle-pages")) {
@@ -40,6 +39,7 @@ logInRegisterPage.addEventListener("click", (event) => {
         registerDiv.classList.toggle("hidden");
 
         clearUserProfilePicChoice();
+        
     }
 });
 
@@ -134,16 +134,4 @@ deleteAccountButton.addEventListener("click", async () => {
     modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);  
 })
 
-////// display aside//////////
-async function displayUsersInAside(){
-    const users = await getUsers()
-    for(const key in users){
-        console.log(users[key].username);
-        const userElP = document.createElement("p");
-        userElP.innerText = users[key].username;
-        
-        asideDiv.append(userElP)
-      }
-};
 
-displayUsersInAside();
