@@ -1,6 +1,6 @@
 import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements} from "./modules/utilities.ts";
 import {getUsers, register, deleteUser, postComment} from "./modules/fetch.ts";
-import {applyProfilePic, displayProfilePages} from "./modules/display.ts";
+import {applyProfilePic, displayProfilePages, displayUsersInAside} from "./modules/display.ts";
 
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
 const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
@@ -156,19 +156,6 @@ deleteAccountButton.addEventListener("click", async () => {
     modifyClassOnElements("remove", "hidden", logInDiv);
     modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
 });
-
-////// display aside//////////
-async function displayUsersInAside() {
-    const users = await getUsers();
-    for (const key in users) {
-        const userElP = document.createElement("p");
-        userElP.innerText = users[key].username;
-
-        asideDiv.append(userElP);
-    }
-}
-
-displayUsersInAside();
 
 esportsCommentForm.addEventListener("submit", commentHandler);
 
