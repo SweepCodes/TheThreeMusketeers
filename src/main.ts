@@ -131,5 +131,19 @@ deleteAccountButton.addEventListener("click", async () => {
         }
     }
     modifyClassOnElements("remove", "hidden", logInDiv);
-    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
-});
+    modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);  
+})
+
+////// display aside//////////
+async function displayUsersInAside(){
+    const users = await getUsers()
+    for(const key in users){
+        console.log(users[key].username);
+        const userElP = document.createElement("p");
+        userElP.innerText = users[key].username;
+        
+        asideDiv.append(userElP)
+      }
+};
+
+displayUsersInAside();
