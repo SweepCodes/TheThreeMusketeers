@@ -26,11 +26,24 @@ export async function displayProfilePages(user: string, loggedInUser: string): P
       profilePageImgElement.src = currentUser.profilepic;
       profilePageH2Element.innerText = currentUser.username;
 
+      modifyClassOnElements("add", "hidden", deleteAccountButton);
       modifyClassOnElements("add", "circle", profilePageImgElement);
       if (user === loggedInUser) {
         modifyClassOnElements("remove", "hidden", deleteAccountButton);
       };
     };
   };
+};
+
+export async function displayUsersInAside(): Promise<void>{
+  const asideDiv = document.querySelector("aside") as HTMLDivElement;
+  const users = await getUsers()
+  for(const key in users){
+      console.log(users[key].username);
+      const userElP = document.createElement("p");
+      userElP.innerText = users[key].username;
+      
+      asideDiv.append(userElP);
+    };
 };
 
