@@ -155,6 +155,7 @@ deleteAccountButton.addEventListener("click", async () => {
     }
     modifyClassOnElements("remove", "hidden", logInDiv);
     modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
+    asideDiv.innerHTML = "";
 });
 
 esportsCommentForm.addEventListener("submit", commentHandler);
