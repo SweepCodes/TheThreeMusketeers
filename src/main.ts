@@ -29,6 +29,12 @@ const asideDiv = document.querySelector("aside") as HTMLDivElement;
 const esportsCommentForm = document.querySelector("#esports-form") as HTMLFormElement;
 const categoryEsports = document.querySelector("#esports-title") as HTMLLIElement;
 const esportCommentInput = document.querySelector("#e-sports-comment") as HTMLInputElement;
+const moviesCommentForm = document.querySelector("#movies-tv-shows-form") as HTMLFormElement;
+const categoryMovies = document.querySelector("#movies-title") as HTMLLIElement;
+const moviesCommentInput = document.querySelector("#movies-tv-shows-comment") as HTMLInputElement;
+const mobileGameCommentForm = document.querySelector("#mobile-games-form") as HTMLFormElement;
+const categoryMobileGame = document.querySelector("#mobile-games-title") as HTMLLIElement;
+const mobileGamesCommentInput = document.querySelector("#mobile-games-comment") as HTMLInputElement;
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -158,12 +164,14 @@ deleteAccountButton.addEventListener("click", async () => {
     asideDiv.innerHTML = "";
 });
 
-esportsCommentForm.addEventListener("submit", commentHandler);
+esportsCommentForm.addEventListener("submit", (event) => commentHandler(event, categoryEsports, esportCommentInput));
+moviesCommentForm.addEventListener("submit", (event) => commentHandler(event, categoryMovies, moviesCommentInput));
+mobileGameCommentForm.addEventListener("submit", (event) => commentHandler(event, categoryMobileGame, mobileGamesCommentInput));
 
-async function commentHandler(event) {
+async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, commentInput: HTMLInputElement): Promise<void> {
     event.preventDefault();
-    const category = categoryEsports.innerText;
-    const context = esportCommentInput.value;
+    const category = categoryText.innerText;
+    const context = commentInput.value;
     const username = loggedInUser;
 
     const users = await getUsers();
@@ -173,4 +181,5 @@ async function commentHandler(event) {
             await postComment(userId, category, context, username);
         }
     }
+    commentInput.value = "";
 }

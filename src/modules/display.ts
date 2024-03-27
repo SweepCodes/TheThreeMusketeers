@@ -39,7 +39,6 @@ export async function displayUsersInAside(): Promise<void>{
   const asideDiv = document.querySelector("aside") as HTMLDivElement;
   const users = await getUsers()
   for(const key in users){
-      console.log(users[key].username);
       const userElP = document.createElement("p");
       userElP.innerText = users[key].username;
       
