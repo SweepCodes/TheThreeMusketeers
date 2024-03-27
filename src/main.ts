@@ -216,11 +216,17 @@ function displayComments(username: string, context: string, category: string){
     const commentDiv = document.createElement("div") as HTMLDivElement;
     const commentP = document.createElement("p") as HTMLParagraphElement;
     const userH2 = document.createElement("h2") as HTMLHeadElement;
+    const deleteTrashCan = document.createElement("img") as HTMLImageElement;
     userH2.innerText = username;
     commentP.innerText = context;
+    deleteTrashCan.classList.add("test")
+    deleteTrashCan.src = "./images/bin.png"
+
+    console.log(deleteTrashCan);
+    
 
     commentDiv.classList.add("forum-container");
-    commentDiv.append(userH2, commentP);
+    commentDiv.append(userH2, commentP, deleteTrashCan);
     if(!eSportsDiv.classList.contains("hidden") && category == categoryEsports.innerText){
         esportsCommentDiv.append(commentDiv)
     }
