@@ -129,7 +129,7 @@ headerNavbar.addEventListener("click", async (event) => {
             } else if (target.id == "logged-in-profile-pic") {
                 modifyClassOnElements("remove", "hidden", profileDiv);
                 modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
-                displayProfilePages(loggedInUser, loggedInUser);
+                await displayProfilePages(loggedInUser, loggedInUser);
             }
             break;
     }
@@ -141,12 +141,12 @@ logOutButton.addEventListener("click", () => {
     asideDiv.innerHTML = "";
 });
 
-asideDiv.addEventListener("click", (event) => {
+asideDiv.addEventListener("click", async (event) => {
     const target = event.target as HTMLElement;
     selectedUser = target.innerText;
     modifyClassOnElements("remove", "hidden", profileDiv);
     modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
-    displayProfilePages(selectedUser, loggedInUser);
+    await displayProfilePages(selectedUser, loggedInUser);
 });
 
 ////// Delete user////////////
