@@ -151,6 +151,13 @@ footer img {
   cursor: pointer;
 }
 
+.front-pages-button {
+  border-radius: 50px;
+  padding: 10px;
+  border: 2px solid grey;
+  margin: 5px;
+}
+
 /* End log in CSS */
 
 /* Start register CSS */
@@ -216,6 +223,15 @@ footer img {
   background-color: lightgrey;
 }
 
+#delete-button {
+  color: white;
+  background-color: red;
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 30px;
+  width: 110px;
+}
+
 /* End profilepage CSS */
 
 /* Start aside CSS */
@@ -227,7 +243,7 @@ aside {
   width: 100px;
   height: 400px;
   overflow-y: scroll;
-  box-shadow: rgb(124, 87, 57) 0px 10px 20px 0px;
+  box-shadow: rgb(200, 144, 98) 0px 10px 20px 0px;
   display: flex;
   align-items: center;
   flex-direction: column;
