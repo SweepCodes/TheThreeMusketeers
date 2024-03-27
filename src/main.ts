@@ -181,5 +181,6 @@ async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, com
             await postComment(userId, category, context, username);
         }
     }
+    
     commentInput.value = "";
 }

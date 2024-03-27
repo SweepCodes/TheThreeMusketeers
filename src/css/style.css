@@ -3,6 +3,10 @@
   margin: 0px;
   box-sizing: border-box;
 }
+button{
+  cursor: pointer;
+}
+
 body {
   background-color: #fac898;
   padding-bottom: 100px;
@@ -61,11 +65,13 @@ nav ul li:active {
 nav ul li:hover {
   color: #41444b;
   background-color: #fac898;
+  cursor: pointer;
 }
 
 nav ul li:hover a {
   color: #41444b;
   background-color: #fac898;
+  
 }
 
 nav button {
@@ -81,11 +87,13 @@ nav img {
 header #logo {
   height: 50px;
   margin-left: 5px;
+  cursor: pointer;
 }
 
 #logged-in-profile-pic {
   width: 60px;
   background-color: lightgrey;
+  cursor: pointer;
 }
 
 /* End header CSS */
