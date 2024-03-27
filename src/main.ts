@@ -222,8 +222,8 @@ function displayComments(username: string, context: string, category: string){
     const deleteTrashCan = document.createElement("img") as HTMLImageElement;
     userH2.innerText = username;
     commentP.innerText = context;
+    deleteTrashCan.classList.add("deleteTrashCanButtonForComments")
     const trashImagUrl = new URL('./images/trash.png', import.meta.url);
-
     deleteTrashCan.src = trashImagUrl.toString();
 
     commentDiv.classList.add("forum-container");

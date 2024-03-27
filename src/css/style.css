@@ -270,3 +270,6 @@ aside {
 
 /* End Forums CSS */
 
+.deleteTrashCanButtonForComments{
+  width: 30px;
+}
