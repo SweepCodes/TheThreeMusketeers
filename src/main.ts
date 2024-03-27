@@ -194,11 +194,7 @@ async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, com
             await postComment(userId, category, context, username);
         }
     }
-    
-
-    displayComments(username, context, category );
-    
-    
+    displayComments(username, context, category, loggedInUser);
     commentInput.value = "";
 }
 
@@ -210,24 +206,29 @@ async function displayAllComments() {
     mobileGameCommentDiv.innerHTML = "";
     
     for(const key in comments){
-        displayComments(comments[key].username, comments[key].context, comments[key].category )
+        displayComments(comments[key].username, comments[key].context, comments[key].category, loggedInUser )
     }
 }
 
 
-function displayComments(username: string, context: string, category: string){
+function displayComments(username: string, context: string, category: string, user: string){
     const commentDiv = document.createElement("div") as HTMLDivElement;
     const commentP = document.createElement("p") as HTMLParagraphElement;
     const userH2 = document.createElement("h2") as HTMLHeadElement;
-    const deleteTrashCan = document.createElement("img") as HTMLImageElement;
     userH2.innerText = username;
     commentP.innerText = context;
-    deleteTrashCan.classList.add("deleteTrashCanButtonForComments")
-    const trashImagUrl = new URL('./images/trash.png', import.meta.url);
-    deleteTrashCan.src = trashImagUrl.toString();
 
     commentDiv.classList.add("forum-container");
-    commentDiv.append(userH2, commentP, deleteTrashCan);
+    commentDiv.append(userH2, commentP);
+
+    if(username === loggedInUser){
+        const trashImagUrl = new URL('./images/trash.png', import.meta.url);
+        const deleteTrashCan = document.createElement("img") as HTMLImageElement;
+        deleteTrashCan.src = trashImagUrl.toString();
+        deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
+        commentDiv.append(deleteTrashCan);
+    }
+
     if(!eSportsDiv.classList.contains("hidden") && category == categoryEsports.innerText){
         esportsCommentDiv.append(commentDiv)
     }
@@ -236,6 +237,5 @@ function displayComments(username: string, context: string, category: string){
     }
     else if(!mobileGamesDiv.classList.contains("hidden")&& category == categoryMobileGame.innerText){
         mobileGameCommentDiv.append(commentDiv)
-        
     }
-}
+};
