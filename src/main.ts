@@ -164,9 +164,9 @@ deleteAccountButton.addEventListener("click", async () => {
     asideDiv.innerHTML = "";
 });
 
-esportsCommentForm.addEventListener("submit", (event) => commentHandler(event, categoryEsports, esportCommentInput));
-moviesCommentForm.addEventListener("submit", (event) => commentHandler(event, categoryMovies, moviesCommentInput));
-mobileGameCommentForm.addEventListener("submit", (event) => commentHandler(event, categoryMobileGame, mobileGamesCommentInput));
+esportsCommentForm.addEventListener("submit", async (event) => await commentHandler(event, categoryEsports, esportCommentInput));
+moviesCommentForm.addEventListener("submit", async (event) => await commentHandler(event, categoryMovies, moviesCommentInput));
+mobileGameCommentForm.addEventListener("submit", async (event) => await commentHandler(event, categoryMobileGame, mobileGamesCommentInput));
 
 async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, commentInput: HTMLInputElement): Promise<void> {
     event.preventDefault();
