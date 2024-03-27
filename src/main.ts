@@ -36,8 +36,8 @@ const mobileGameCommentForm = document.querySelector("#mobile-games-form") as HT
 const categoryMobileGame = document.querySelector("#mobile-games-title") as HTMLLIElement;
 const mobileGamesCommentInput = document.querySelector("#mobile-games-comment") as HTMLInputElement;
 const esportsCommentDiv = document.querySelector("#e-sport-comments-posted") as HTMLDivElement;
-const esportsMoviesDiv = document.querySelector("#movies-tv-shows-comments-container") as HTMLDivElement;
-const esportsMobileGameDiv = document.querySelector("#mobile-games-comments-container") as HTMLDivElement;
+const moviesCommentDiv = document.querySelector("#movies-comments-posted") as HTMLDivElement;
+const mobileGameCommentDiv = document.querySelector("#mobile-games-comments-posted") as HTMLDivElement;
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -116,14 +116,20 @@ headerNavbar.addEventListener("click", async (event) => {
         case "Mobile Games":
             modifyClassOnElements("remove", "hidden", mobileGamesDiv);
             modifyClassOnElements("add", "hidden", moviesTVShowsDiv, eSportsDiv, homePageDiv, profileDiv);
+            
+            await displayAllComments();
             break;
         case "Movies/TV-Shows":
             modifyClassOnElements("remove", "hidden", moviesTVShowsDiv);
             modifyClassOnElements("add", "hidden", mobileGamesDiv, eSportsDiv, homePageDiv, profileDiv);
+            
+            await displayAllComments();
             break;
         case "E-Sports":
             modifyClassOnElements("remove", "hidden", eSportsDiv);
             modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, homePageDiv, profileDiv);
+            
+            await displayAllComments();
             break;
         default:
             if (target.id == "logo" && !navBar.classList.contains("hidden")) {
@@ -185,23 +191,29 @@ async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, com
             await postComment(userId, category, context, username);
         }
     }
-
-    displayComments(username, context);
     
 
+    displayComments(username, context, category );
+    
+    
     commentInput.value = "";
 }
 
-async function displayGetComments() {
+async function displayAllComments() {
     const comments = await getComments();
+    console.log(comments);
+    moviesCommentDiv.innerHTML = "";
+    esportsCommentDiv.innerHTML = "";
+    mobileGameCommentDiv.innerHTML = "";
+    
     for(const key in comments){
-        displayComments(comments[key].username, comments[key].context)
+        displayComments(comments[key].username, comments[key].context, comments[key].category )
     }
     
 }
-displayGetComments()
 
-function displayComments(username: string, context: string){
+
+function displayComments(username: string, context: string, category: string){
     const commentDiv = document.createElement("div") as HTMLDivElement;
     const commentP = document.createElement("p") as HTMLParagraphElement;
     const userH2 = document.createElement("h2") as HTMLHeadElement;
@@ -210,5 +222,14 @@ function displayComments(username: string, context: string){
 
     commentDiv.classList.add("forum-container")
     commentDiv.append(userH2, commentP);
-    esportsCommentDiv.append(commentDiv)
+    if(!eSportsDiv.classList.contains("hidden") && category == categoryEsports.innerText){
+        esportsCommentDiv.append(commentDiv)
+    }
+    else if(!moviesTVShowsDiv.classList.contains("hidden")&& category == categoryMovies.innerText){
+        moviesCommentDiv.append(commentDiv)
+    }
+    else if(!mobileGamesDiv.classList.contains("hidden")&& category == categoryMobileGame.innerText){
+        mobileGameCommentDiv.append(commentDiv)
+        
+    }
 }
