@@ -1,5 +1,5 @@
 import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements} from "./modules/utilities.ts";
-import {getUsers, register, deleteUser, postComment} from "./modules/fetch.ts";
+import {getUsers, register, deleteUser, postComment, getComments} from "./modules/fetch.ts";
 import {applyProfilePic, displayProfilePages, displayUsersInAside} from "./modules/display.ts";
 
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
@@ -35,6 +35,9 @@ const moviesCommentInput = document.querySelector("#movies-tv-shows-comment") as
 const mobileGameCommentForm = document.querySelector("#mobile-games-form") as HTMLFormElement;
 const categoryMobileGame = document.querySelector("#mobile-games-title") as HTMLLIElement;
 const mobileGamesCommentInput = document.querySelector("#mobile-games-comment") as HTMLInputElement;
+const esportsCommentDiv = document.querySelector("#e-sport-comments-posted") as HTMLDivElement;
+const esportsMoviesDiv = document.querySelector("#movies-tv-shows-comments-container") as HTMLDivElement;
+const esportsMobileGameDiv = document.querySelector("#mobile-games-comments-container") as HTMLDivElement;
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -164,6 +167,7 @@ deleteAccountButton.addEventListener("click", async () => {
     asideDiv.innerHTML = "";
 });
 
+///////////comments /////
 esportsCommentForm.addEventListener("submit", async (event) => await commentHandler(event, categoryEsports, esportCommentInput));
 moviesCommentForm.addEventListener("submit", async (event) => await commentHandler(event, categoryMovies, moviesCommentInput));
 mobileGameCommentForm.addEventListener("submit", async (event) => await commentHandler(event, categoryMobileGame, mobileGamesCommentInput));
@@ -181,6 +185,28 @@ async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, com
             await postComment(userId, category, context, username);
         }
     }
-    
+
+    displayComments(username, context);
+
     commentInput.value = "";
+}
+
+async function displayGetComments() {
+    const comments = await getComments();
+    for (const key in comments) {
+        displayComments(comments[key].username, comments[key].context);
+    }
+}
+displayGetComments();
+
+function displayComments(username: string, context: string) {
+    const commentDiv = document.createElement("div") as HTMLDivElement;
+    const commentP = document.createElement("p") as HTMLParagraphElement;
+    const userH2 = document.createElement("h2") as HTMLHeadElement;
+    userH2.innerText = username;
+    commentP.innerText = context;
+
+    commentDiv.classList.add("forum-container");
+    commentDiv.append(userH2, commentP);
+    esportsCommentDiv.append(commentDiv);
 }
