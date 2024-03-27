@@ -41,7 +41,7 @@ export async function register(username: string, password: string, profilepic: s
     return data as Users;
 }
 
-export async function deleteUser(userId: string): Promise<void> {
+export async function deleteUser(userId: string): Promise<Users> {
     const url = baseUrl + "/users/" + userId + "/.json";
 
     const requestOptions = {
@@ -53,7 +53,7 @@ export async function deleteUser(userId: string): Promise<void> {
     let response = await fetch(url, requestOptions);
     let data = await response.json();
 
-    return data as void;
+    return data as Users;
 }
 export async function postComment(userId: string, category: string, context: string, username: string): Promise<Comments> {
     const url = baseUrl + "/comments/.json";
@@ -68,4 +68,19 @@ export async function postComment(userId: string, category: string, context: str
     let response = await fetch(url, requestOptions);
     let data = await response.json();
     return data.comments as Comments;
+}
+
+export async function deleteComment(commentId: string): Promise<Comments> {
+    const url = baseUrl + "/comments/" + commentId + "/.json";
+
+    const requestOptions = {
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(commentId),
+    };
+
+    let response = await fetch(url, requestOptions);
+    let data = await response.json();
+
+    return data as Comments;
 }

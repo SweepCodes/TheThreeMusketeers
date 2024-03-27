@@ -1,5 +1,5 @@
 import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements} from "./modules/utilities.ts";
-import {getUsers, register, deleteUser, postComment} from "./modules/fetch.ts";
+import {getUsers, register, deleteUser, postComment, deleteComment} from "./modules/fetch.ts";
 import {applyProfilePic, displayProfilePages, displayUsersInAside} from "./modules/display.ts";
 
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
