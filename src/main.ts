@@ -2,6 +2,9 @@ import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnE
 import {getUsers, register, deleteUser, postComment, getComments} from "./modules/fetch.ts";
 import {applyProfilePic, displayProfilePages, displayUsersInAside} from "./modules/display.ts";
 
+
+//  import trashImage from "./images/trash.png";
+
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
 const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
 const logInForm = document.getElementById("log-in-form") as HTMLFormElement;
@@ -219,11 +222,9 @@ function displayComments(username: string, context: string, category: string){
     const deleteTrashCan = document.createElement("img") as HTMLImageElement;
     userH2.innerText = username;
     commentP.innerText = context;
-    deleteTrashCan.classList.add("test")
-    deleteTrashCan.src = "./images/bin.png"
+    const trashImagUrl = new URL('./images/trash.png', import.meta.url);
 
-    console.log(deleteTrashCan);
-    
+    deleteTrashCan.src = trashImagUrl.toString();
 
     commentDiv.classList.add("forum-container");
     commentDiv.append(userH2, commentP, deleteTrashCan);
