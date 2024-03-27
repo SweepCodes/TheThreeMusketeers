@@ -195,7 +195,7 @@ footer img {
 /* Start maincontainer CSS */
 #main-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 /* End maincontainer CSS */
@@ -203,9 +203,8 @@ footer img {
 /* Start homepage CSS */
 
 #welcome-div {
-  margin-left: auto;
-  margin-right: auto;
   border: solid 2px black;
+  background-color: whitesmoke;
   width: 80%;
   height: 200px;
   display: flex;
@@ -214,9 +213,15 @@ footer img {
   align-items: center;
   text-align: center;
 }
+
 /* End homepage CSS */
 
 /* Start profilepage CSS */
+
+#profile-page {
+  margin-left: 125px;
+  margin-top: 38px;
+}
 
 #profile-page-profile-picture {
   width: 150px;
@@ -237,12 +242,13 @@ footer img {
 /* Start aside CSS */
 
 aside {
+  margin-right: 25px;
+  margin-top: 38px;
   background-color: whitesmoke;
   border: solid 2px black;
-  border-radius: 15px;
-  width: 100px;
-  height: 400px;
-  overflow-y: scroll;
+  border-radius: 10px;
+  width: 10%;
+  height: fit-content;
   box-shadow: rgb(200, 144, 98) 0px 10px 20px 0px;
   display: flex;
   align-items: center;
@@ -253,6 +259,7 @@ aside {
   cursor: pointer;
   width: fit-content;
   margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 /* End aside CSS */
@@ -265,7 +272,7 @@ aside {
   border-radius: 5px;
   padding: 10px;
   margin-top: 10px;
-  width: 850px;
+  width: 950px;
 }
 
 /* End Forums CSS */

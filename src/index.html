@@ -75,7 +75,6 @@
     <div id="main-container">
       <!-- Home page -->
       <div id="home-page" class="hidden">
-        <h2>Home</h2>
         <div id="welcome-div">
           <h1>Welcome to Musketeerium</h1>
           <p>
@@ -134,12 +133,16 @@
       </div>
       <!-- Profile page -->
       <div id="profile-page" class="hidden">
-        <img id="profile-page-profile-picture" src="#" alt="profile picture" />
-        <h2 id="profile-page-username">Username:</h2>
-        <button id="delete-button" class="hidden">Delete account</button>
-        <div></div>
+        <div id="profile-info">
+          <img id="profile-page-profile-picture" src="#" alt="profile picture" />
+          <h2 id="profile-page-username">Username:</h2>
+          <button id="delete-button" class="hidden">Delete account</button>
+        </div>
+        <div id="user-comments"></div>
       </div>
-      <aside class="hidden"></aside>
+      <aside class="hidden">
+        <h2>Users:</h2>
+      </aside>
     </div>
     <footer>
       <img src="./images/github.png" alt="github" />
