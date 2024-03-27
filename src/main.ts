@@ -138,7 +138,7 @@ headerNavbar.addEventListener("click", async (event) => {
             } else if (target.id == "logged-in-profile-pic") {
                 modifyClassOnElements("remove", "hidden", profileDiv);
                 modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
-                displayProfilePages(loggedInUser, loggedInUser);
+                await displayProfilePages(loggedInUser, loggedInUser);
             }
             break;
     }
@@ -150,12 +150,12 @@ logOutButton.addEventListener("click", () => {
     asideDiv.innerHTML = "";
 });
 
-asideDiv.addEventListener("click", (event) => {
+asideDiv.addEventListener("click", async (event) => {
     const target = event.target as HTMLElement;
     selectedUser = target.innerText;
     modifyClassOnElements("remove", "hidden", profileDiv);
     modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
-    displayProfilePages(selectedUser, loggedInUser);
+    await displayProfilePages(selectedUser, loggedInUser);
 });
 
 ////// Delete user////////////
@@ -209,7 +209,6 @@ async function displayAllComments() {
     for(const key in comments){
         displayComments(comments[key].username, comments[key].context, comments[key].category )
     }
-    
 }
 
 
@@ -220,7 +219,7 @@ function displayComments(username: string, context: string, category: string){
     userH2.innerText = username;
     commentP.innerText = context;
 
-    commentDiv.classList.add("forum-container")
+    commentDiv.classList.add("forum-container");
     commentDiv.append(userH2, commentP);
     if(!eSportsDiv.classList.contains("hidden") && category == categoryEsports.innerText){
         esportsCommentDiv.append(commentDiv)

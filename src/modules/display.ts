@@ -41,6 +41,7 @@ export async function displayUsersInAside(): Promise<void>{
   for(const key in users){
       const userElP = document.createElement("p");
       userElP.innerText = users[key].username;
+      userElP.classList.add("users")
       
       asideDiv.append(userElP);
     };

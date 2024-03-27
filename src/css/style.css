@@ -90,6 +90,13 @@ header #logo {
   cursor: pointer;
 }
 
+#log-out-button {
+  background-image: linear-gradient(rgb(253, 65, 65), #fac898);
+  border: black 2px solid;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
 #logged-in-profile-pic {
   width: 60px;
   background-color: lightgrey;
@@ -142,6 +149,13 @@ footer img {
 .toggle-pages:hover {
   color: whitesmoke;
   cursor: pointer;
+}
+
+.front-pages-button {
+  border-radius: 50px;
+  padding: 10px;
+  border: 2px solid grey;
+  margin: 5px;
 }
 
 /* End log in CSS */
@@ -209,14 +223,36 @@ footer img {
   background-color: lightgrey;
 }
 
+#delete-button {
+  color: white;
+  background-color: red;
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 30px;
+  width: 110px;
+}
+
 /* End profilepage CSS */
 
 /* Start aside CSS */
 
 aside {
-  border: solid 2px rgb(255, 0, 238);
+  background-color: whitesmoke;
+  border: solid 2px black;
+  border-radius: 15px;
   width: 100px;
   height: 400px;
+  overflow-y: scroll;
+  box-shadow: rgb(200, 144, 98) 0px 10px 20px 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.users {
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 10px;
 }
 
 /* End aside CSS */
@@ -229,6 +265,8 @@ aside {
   border-radius: 5px;
   padding: 10px;
   margin-top: 10px;
+  width: 850px;
+  height: 50px;
 }
 
 /* End Forums CSS */
