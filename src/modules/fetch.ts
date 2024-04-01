@@ -72,15 +72,15 @@ export async function postComment(userId: string, category: string, context: str
 
 export async function deleteComment(commentId: string): Promise<Comments> {
     const url = baseUrl + "/comments/" + commentId + "/.json";
-
+    
     const requestOptions = {
         method: "DELETE",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(commentId),
     };
-
+    
     let response = await fetch(url, requestOptions);
+    
     let data = await response.json();
-
     return data as Comments;
 }

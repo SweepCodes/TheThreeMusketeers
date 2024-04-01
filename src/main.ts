@@ -1,6 +1,7 @@
 import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements} from "./modules/utilities.ts";
-import {getUsers, register, deleteUser, postComment, getComments, deleteComment} from "./modules/fetch.ts";
+import {getUsers, register, deleteUser, postComment, getComments} from "./modules/fetch.ts";
 import {applyProfilePic, displayProfilePages, displayUsersInAside} from "./modules/display.ts";
+
 
 //  import trashImage from "./images/trash.png";
 
@@ -42,10 +43,7 @@ const esportsCommentDiv = document.querySelector("#e-sport-comments-posted") as 
 const moviesCommentDiv = document.querySelector("#movies-comments-posted") as HTMLDivElement;
 const mobileGameCommentDiv = document.querySelector("#mobile-games-comments-posted") as HTMLDivElement;
 const userCommentsMainDiv = document.querySelector("#user-comments") as HTMLDivElement;
-const trashImagUrl = new URL("./images/trash.png", import.meta.url);
-const deleteTrashCan = document.createElement("img") as HTMLImageElement;
-deleteTrashCan.src = trashImagUrl.toString();
-deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
+
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -125,19 +123,19 @@ headerNavbar.addEventListener("click", async (event) => {
         case "Mobile Games":
             modifyClassOnElements("remove", "hidden", mobileGamesDiv);
             modifyClassOnElements("add", "hidden", moviesTVShowsDiv, eSportsDiv, homePageDiv, profileDiv);
-
+            
             await displayAllComments();
             break;
         case "Movies/TV-Shows":
             modifyClassOnElements("remove", "hidden", moviesTVShowsDiv);
             modifyClassOnElements("add", "hidden", mobileGamesDiv, eSportsDiv, homePageDiv, profileDiv);
-
+            
             await displayAllComments();
             break;
         case "E-Sports":
             modifyClassOnElements("remove", "hidden", eSportsDiv);
             modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, homePageDiv, profileDiv);
-
+            
             await displayAllComments();
             break;
         default:
@@ -145,7 +143,7 @@ headerNavbar.addEventListener("click", async (event) => {
                 modifyClassOnElements("remove", "hidden", homePageDiv);
                 modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, eSportsDiv, profileDiv);
             } else if (target.id == "logged-in-profile-pic") {
-                displayUserComments(loggedInUser);
+                displayUserComments(loggedInUser)
                 modifyClassOnElements("remove", "hidden", profileDiv);
                 modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
                 await displayProfilePages(loggedInUser, loggedInUser);
@@ -162,30 +160,37 @@ async function displayUserComments(chosenUser: string) {
     const userCommentH1 = document.createElement("h1") as HTMLHeadingElement;
     userCommentH1.innerText = "Profile comments";
     userCommentsMainDiv.append(userCommentH1);
-    let commentsCount: number = 0;
-    for (const key in userCommets) {
-        if (chosenUser == userCommets[key].username) {
+    let commentsCount:number = 0;
+    for(const key in userCommets){
+        if(chosenUser == userCommets[key].username){
             const userCommentDiv = document.createElement("div") as HTMLDivElement;
             const userCommentP = document.createElement("p") as HTMLParagraphElement;
-            userCommentDiv.classList.add("forum-container");
+            userCommentDiv.classList.add("forum-container")
             userCommentP.innerText = userCommets[key].context;
             userCommentDiv.append(userCommentP);
             userCommentsMainDiv.append(userCommentDiv);
-
+            
             if (chosenUser === loggedInUser) {
-                const trashImagUrl = new URL("./images/trash.png", import.meta.url);
+                const trashImagUrl = new URL('./images/trash.png', import.meta.url);
                 const deleteTrashCan = document.createElement("img") as HTMLImageElement;
                 deleteTrashCan.src = trashImagUrl.toString();
                 deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
                 userCommentDiv.append(deleteTrashCan);
             }
             commentsCount++;
-            if (commentsCount >= 3 && chosenUser !== loggedInUser) {
+            if(commentsCount>=3 && chosenUser !==loggedInUser){
                 break;
             }
         }
+       
     }
+    
 }
+
+ 
+
+
+
 
 logOutButton.addEventListener("click", () => {
     modifyClassOnElements("remove", "hidden", logInDiv);
@@ -195,9 +200,9 @@ logOutButton.addEventListener("click", () => {
 
 asideDiv.addEventListener("click", async (event) => {
     const target = event.target as HTMLElement;
-    if (target.classList.contains("users")) {
+    if(target.classList.contains("users")){
         selectedUser = target.innerText;
-        displayUserComments(selectedUser);
+        displayUserComments(selectedUser)
         modifyClassOnElements("remove", "hidden", profileDiv);
         modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
         await displayProfilePages(selectedUser, loggedInUser);
@@ -246,13 +251,14 @@ async function displayAllComments() {
     moviesCommentDiv.innerHTML = "";
     esportsCommentDiv.innerHTML = "";
     mobileGameCommentDiv.innerHTML = "";
-
-    for (const key in comments) {
-        displayComments(comments[key].username, comments[key].context, comments[key].category, loggedInUser);
+    
+    for(const key in comments){
+        displayComments(comments[key].username, comments[key].context, comments[key].category, loggedInUser )
     }
 }
 
-function displayComments(username: string, context: string, category: string, user: string) {
+
+function displayComments(username: string, context: string, category: string, user: string){
     const commentDiv = document.createElement("div") as HTMLDivElement;
     const commentP = document.createElement("p") as HTMLParagraphElement;
     const userH2 = document.createElement("h2") as HTMLHeadElement;
@@ -262,22 +268,21 @@ function displayComments(username: string, context: string, category: string, us
     commentDiv.classList.add("forum-container");
     commentDiv.append(userH2, commentP);
 
-    if (username === loggedInUser) commentDiv.append(deleteTrashCan);
-
-    if (!eSportsDiv.classList.contains("hidden") && category == categoryEsports.innerText) {
-        esportsCommentDiv.append(commentDiv);
-    } else if (!moviesTVShowsDiv.classList.contains("hidden") && category == categoryMovies.innerText) {
-        moviesCommentDiv.append(commentDiv);
-    } else if (!mobileGamesDiv.classList.contains("hidden") && category == categoryMobileGame.innerText) {
-        mobileGameCommentDiv.append(commentDiv);
+    if(username === loggedInUser){
+        const trashImagUrl = new URL('./images/trash.png', import.meta.url);
+        const deleteTrashCan = document.createElement("img") as HTMLImageElement;
+        deleteTrashCan.src = trashImagUrl.toString();
+        deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
+        commentDiv.append(deleteTrashCan);
     }
-}
 
-deleteTrashCan.addEventListener("click", deleteCommentHandler);
-
-async function deleteCommentHandler() {
-    const comments = await getComments();
-    for (const key in comments) {
+    if(!eSportsDiv.classList.contains("hidden") && category == categoryEsports.innerText){
+        esportsCommentDiv.append(commentDiv)
     }
-    // deleteComment();
-}
+    else if(!moviesTVShowsDiv.classList.contains("hidden")&& category == categoryMovies.innerText){
+        moviesCommentDiv.append(commentDiv)
+    }
+    else if(!mobileGamesDiv.classList.contains("hidden")&& category == categoryMobileGame.innerText){
+        mobileGameCommentDiv.append(commentDiv)
+    }
+};
