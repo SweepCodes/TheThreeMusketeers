@@ -157,6 +157,7 @@ async function displayUserComments(chosenUser: string) {
     const userCommentH1 = document.createElement("h1") as HTMLHeadingElement;
     userCommentH1.innerText = "Profile comments";
     userCommentsMainDiv.append(userCommentH1);
+    let commentsCount:number = 0;
     for(const key in userCommets){
         if(chosenUser == userCommets[key].username){
             const userCommentDiv = document.createElement("div") as HTMLDivElement;
@@ -165,6 +166,7 @@ async function displayUserComments(chosenUser: string) {
             userCommentP.innerText = userCommets[key].context;
             userCommentDiv.append(userCommentP);
             userCommentsMainDiv.append(userCommentDiv);
+            
             if (chosenUser === loggedInUser) {
                 const trashImagUrl = new URL('./images/trash.png', import.meta.url);
                 const deleteTrashCan = document.createElement("img") as HTMLImageElement;
@@ -172,7 +174,12 @@ async function displayUserComments(chosenUser: string) {
                 deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
                 userCommentDiv.append(deleteTrashCan);
             }
+            commentsCount++;
+            if(commentsCount>=3 && chosenUser !==loggedInUser){
+                break;
+            }
         }
+       
     }
     
 }
