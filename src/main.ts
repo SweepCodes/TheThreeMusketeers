@@ -27,6 +27,7 @@ const eSportsDiv = document.getElementById("e-sport-forum") as HTMLDivElement;
 const profileDiv = document.getElementById("profile-page") as HTMLDivElement;
 const deleteAccountButton = document.getElementById("delete-button") as HTMLButtonElement;
 const logOutButton = document.getElementById("log-out-button") as HTMLButtonElement;
+const usernamePElement = document.getElementById("logged-in-username") as HTMLParagraphElement;
 const asideDiv = document.querySelector("aside") as HTMLDivElement;
 const esportsCommentForm = document.querySelector("#esports-form") as HTMLFormElement;
 const categoryEsports = document.querySelector("#esports-title") as HTMLLIElement;
@@ -83,6 +84,7 @@ logInForm.addEventListener("submit", async (event) => {
 
     if (loginCheck) {
         loggedInUser = logInUserInputElement.value;
+        usernamePElement.innerText = loggedInUser;
         modifyClassOnElements("add", "hidden", logInDiv);
         modifyClassOnElements("remove", "hidden", navBar, homePageDiv, asideDiv);
         const userObj = await getUsers();
@@ -103,6 +105,7 @@ registerForm.addEventListener("submit", async (event) => {
         await register(registerUsernameInputElement.value, registerPasswordInputElement.value, chosenImage);
 
         loggedInUser = registerUsernameInputElement.value;
+        usernamePElement.innerText = loggedInUser;
         modifyClassOnElements("remove", "hidden", navBar, homePageDiv, asideDiv);
         modifyClassOnElements("add", "hidden", registerDiv);
         const userObj = await getUsers();
@@ -159,6 +162,7 @@ async function displayUserComments(chosenUser: string) {
     const userCommentH1 = document.createElement("h1") as HTMLHeadingElement;
     userCommentH1.innerText = "Profile comments";
     userCommentsMainDiv.append(userCommentH1);
+    let commentsCount: number = 0;
     for (const key in userCommets) {
         if (chosenUser == userCommets[key].username) {
             const userCommentDiv = document.createElement("div") as HTMLDivElement;
@@ -167,7 +171,18 @@ async function displayUserComments(chosenUser: string) {
             userCommentP.innerText = userCommets[key].context;
             userCommentDiv.append(userCommentP);
             userCommentsMainDiv.append(userCommentDiv);
-            if (chosenUser === loggedInUser) userCommentDiv.append(deleteTrashCan);
+
+            if (chosenUser === loggedInUser) {
+                const trashImagUrl = new URL("./images/trash.png", import.meta.url);
+                const deleteTrashCan = document.createElement("img") as HTMLImageElement;
+                deleteTrashCan.src = trashImagUrl.toString();
+                deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
+                userCommentDiv.append(deleteTrashCan);
+            }
+            commentsCount++;
+            if (commentsCount >= 3 && chosenUser !== loggedInUser) {
+                break;
+            }
         }
     }
 }

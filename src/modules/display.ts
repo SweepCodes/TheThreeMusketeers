@@ -37,6 +37,9 @@ export async function displayProfilePages(user: string, loggedInUser: string): P
 
 export async function displayUsersInAside(): Promise<void>{
   const asideDiv = document.querySelector("aside") as HTMLDivElement;
+  const usersListH2 = document.createElement("h2") as HTMLHeadingElement;
+  usersListH2.innerText = "Users:";
+  asideDiv.append(usersListH2)
   const users = await getUsers()
   for(const key in users){
       const userElP = document.createElement("p");
