@@ -195,7 +195,7 @@ footer img {
 /* Start maincontainer CSS */
 #main-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 /* End maincontainer CSS */
@@ -258,8 +258,11 @@ aside {
 .users {
   cursor: pointer;
   width: fit-content;
-  margin-top: 10px;
-  margin-bottom: 5px;
+  padding: 10px;
+}
+
+.users:hover{
+  border-bottom: solid #41444b 1px ;
 }
 
 /* End aside CSS */
@@ -273,11 +276,28 @@ aside {
   padding: 10px;
   margin-top: 10px;
   width: 950px;
+  
 }
 
 /* End Forums CSS */
 
+/* Start delete comment Css */
+
 .deleteTrashCanButtonForComments{
-  width: 30px;
+  width: 20px;
   margin-left: 97%;
 }
+
+
+/* End delete comment Css */
+
+
+/* Start user comments placeholder Css */
+#user-comments{
+  padding: 10px;
+  margin-top: 10px;
+  width: 950px;
+}
+
+
+/* End user comments placeholder Css */

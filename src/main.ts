@@ -41,6 +41,8 @@ const mobileGamesCommentInput = document.querySelector("#mobile-games-comment") 
 const esportsCommentDiv = document.querySelector("#e-sport-comments-posted") as HTMLDivElement;
 const moviesCommentDiv = document.querySelector("#movies-comments-posted") as HTMLDivElement;
 const mobileGameCommentDiv = document.querySelector("#mobile-games-comments-posted") as HTMLDivElement;
+const userCommentsMainDiv = document.querySelector("#user-comments") as HTMLDivElement;
+
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -82,7 +84,6 @@ logInForm.addEventListener("submit", async (event) => {
         modifyClassOnElements("add", "hidden", logInDiv);
         modifyClassOnElements("remove", "hidden", navBar, homePageDiv, asideDiv);
         const userObj = await getUsers();
-
         applyProfilePic(userObj, logInUserInputElement, logInPasswordInputElement);
 
         clearUserProfilePicChoice();
@@ -139,6 +140,7 @@ headerNavbar.addEventListener("click", async (event) => {
                 modifyClassOnElements("remove", "hidden", homePageDiv);
                 modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, eSportsDiv, profileDiv);
             } else if (target.id == "logged-in-profile-pic") {
+                displayUserComments(loggedInUser)
                 modifyClassOnElements("remove", "hidden", profileDiv);
                 modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
                 await displayProfilePages(loggedInUser, loggedInUser);
@@ -146,6 +148,39 @@ headerNavbar.addEventListener("click", async (event) => {
             break;
     }
 });
+
+//////funktionen gör så att kommentarerna hamnar hos rätt user///////////////////////
+
+async function displayUserComments(chosenUser: string) {
+    const userCommets = await getComments();
+    userCommentsMainDiv.innerHTML = " ";
+    const userCommentH1 = document.createElement("h1") as HTMLHeadingElement;
+    userCommentH1.innerText = "Profile comments";
+    userCommentsMainDiv.append(userCommentH1);
+    for(const key in userCommets){
+        if(chosenUser == userCommets[key].username){
+            const userCommentDiv = document.createElement("div") as HTMLDivElement;
+            const userCommentP = document.createElement("p") as HTMLParagraphElement;
+            userCommentDiv.classList.add("forum-container")
+            userCommentP.innerText = userCommets[key].context;
+            userCommentDiv.append(userCommentP);
+            userCommentsMainDiv.append(userCommentDiv);
+            if (chosenUser === loggedInUser) {
+                const trashImagUrl = new URL('./images/trash.png', import.meta.url);
+                const deleteTrashCan = document.createElement("img") as HTMLImageElement;
+                deleteTrashCan.src = trashImagUrl.toString();
+                deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
+                userCommentDiv.append(deleteTrashCan);
+            }
+        }
+    }
+    
+}
+
+ 
+
+
+
 
 logOutButton.addEventListener("click", () => {
     modifyClassOnElements("remove", "hidden", logInDiv);
@@ -155,10 +190,13 @@ logOutButton.addEventListener("click", () => {
 
 asideDiv.addEventListener("click", async (event) => {
     const target = event.target as HTMLElement;
-    selectedUser = target.innerText;
-    modifyClassOnElements("remove", "hidden", profileDiv);
-    modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
-    await displayProfilePages(selectedUser, loggedInUser);
+    if(target.classList.contains("users")){
+        selectedUser = target.innerText;
+        displayUserComments(selectedUser)
+        modifyClassOnElements("remove", "hidden", profileDiv);
+        modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
+        await displayProfilePages(selectedUser, loggedInUser);
+    }
 });
 
 ////// Delete user////////////
@@ -200,7 +238,6 @@ async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, com
 
 async function displayAllComments() {
     const comments = await getComments();
-    console.log(comments);
     moviesCommentDiv.innerHTML = "";
     esportsCommentDiv.innerHTML = "";
     mobileGameCommentDiv.innerHTML = "";
