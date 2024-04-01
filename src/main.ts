@@ -28,6 +28,7 @@ const eSportsDiv = document.getElementById("e-sport-forum") as HTMLDivElement;
 const profileDiv = document.getElementById("profile-page") as HTMLDivElement;
 const deleteAccountButton = document.getElementById("delete-button") as HTMLButtonElement;
 const logOutButton = document.getElementById("log-out-button") as HTMLButtonElement;
+const usernamePElement = document.getElementById("logged-in-username") as HTMLParagraphElement;
 const asideDiv = document.querySelector("aside") as HTMLDivElement;
 const esportsCommentForm = document.querySelector("#esports-form") as HTMLFormElement;
 const categoryEsports = document.querySelector("#esports-title") as HTMLLIElement;
@@ -81,6 +82,7 @@ logInForm.addEventListener("submit", async (event) => {
 
     if (loginCheck) {
         loggedInUser = logInUserInputElement.value;
+        usernamePElement.innerText = loggedInUser;
         modifyClassOnElements("add", "hidden", logInDiv);
         modifyClassOnElements("remove", "hidden", navBar, homePageDiv, asideDiv);
         const userObj = await getUsers();
@@ -101,6 +103,7 @@ registerForm.addEventListener("submit", async (event) => {
         await register(registerUsernameInputElement.value, registerPasswordInputElement.value, chosenImage);
 
         loggedInUser = registerUsernameInputElement.value;
+        usernamePElement.innerText = loggedInUser;
         modifyClassOnElements("remove", "hidden", navBar, homePageDiv, asideDiv);
         modifyClassOnElements("add", "hidden", registerDiv);
         const userObj = await getUsers();
