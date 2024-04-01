@@ -58,6 +58,9 @@ logInRegisterPage.addEventListener("click", (event) => {
         logInDiv.classList.toggle("hidden");
         registerDiv.classList.toggle("hidden");
 
+        const errorMessagePEl = document.getElementById("error-message") as HTMLParagraphElement;
+        if(errorMessagePEl) errorMessagePEl.remove();
+
         clearUserProfilePicChoice();
     }
 });
