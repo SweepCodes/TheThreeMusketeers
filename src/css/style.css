@@ -291,6 +291,7 @@ aside {
 .deleteTrashCanButtonForComments{
   width: 20px;
   margin-left: 97%;
+  cursor: pointer;
 }
 
 

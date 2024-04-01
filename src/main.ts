@@ -178,7 +178,7 @@ async function displayUserComments(chosenUser: string) {
                 userCommentDiv.append(deleteTrashCan);
                 deleteTrashCan.addEventListener("click", ()=>{
                     deleteComment(key)
-                    userCommentDiv.classList.add("hidden");
+                    userCommentDiv.remove()
                     
                 })
             }
@@ -295,7 +295,7 @@ function displayComments(username: string, context: string, category: string, us
         deleteTrashCan.addEventListener("click", async ()=>{
             
             await deleteComment(key);
-            commentDiv.classList.add("hidden")
+            commentDiv.remove()
             
         })
     }
