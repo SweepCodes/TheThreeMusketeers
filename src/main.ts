@@ -1,5 +1,5 @@
 import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements} from "./modules/utilities.ts";
-import {getUsers, register, deleteUser, postComment, getComments} from "./modules/fetch.ts";
+import {getUsers, register, deleteUser, postComment, getComments, deleteComment} from "./modules/fetch.ts";
 import {applyProfilePic, displayProfilePages, displayUsersInAside} from "./modules/display.ts";
 
 
@@ -176,6 +176,12 @@ async function displayUserComments(chosenUser: string) {
                 deleteTrashCan.src = trashImagUrl.toString();
                 deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
                 userCommentDiv.append(deleteTrashCan);
+                deleteTrashCan.addEventListener("click", ()=>{
+                    console.log(key);
+                    deleteComment(key)
+                    userCommentDiv.classList.add("hidden")
+                    
+                })
             }
             commentsCount++;
             if(commentsCount>=3 && chosenUser !==loggedInUser){
@@ -238,11 +244,12 @@ async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, com
     const users = await getUsers();
     for (const key in users) {
         if (users[key].username === loggedInUser) {
-            userId = key;
+            // userId = key;
             await postComment(userId, category, context, username);
         }
     }
-    displayComments(username, context, category, loggedInUser);
+    displayAllComments();
+    
     commentInput.value = "";
 }
 
@@ -253,12 +260,12 @@ async function displayAllComments() {
     mobileGameCommentDiv.innerHTML = "";
     
     for(const key in comments){
-        displayComments(comments[key].username, comments[key].context, comments[key].category, loggedInUser )
+        displayComments(comments[key].username, comments[key].context, comments[key].category, loggedInUser, key )
     }
 }
 
 
-function displayComments(username: string, context: string, category: string, user: string){
+function displayComments(username: string, context: string, category: string, user: string, key: string){
     const commentDiv = document.createElement("div") as HTMLDivElement;
     const commentP = document.createElement("p") as HTMLParagraphElement;
     const userH2 = document.createElement("h2") as HTMLHeadElement;
@@ -268,14 +275,7 @@ function displayComments(username: string, context: string, category: string, us
     commentDiv.classList.add("forum-container");
     commentDiv.append(userH2, commentP);
 
-    if(username === loggedInUser){
-        const trashImagUrl = new URL('./images/trash.png', import.meta.url);
-        const deleteTrashCan = document.createElement("img") as HTMLImageElement;
-        deleteTrashCan.src = trashImagUrl.toString();
-        deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
-        commentDiv.append(deleteTrashCan);
-    }
-
+    
     if(!eSportsDiv.classList.contains("hidden") && category == categoryEsports.innerText){
         esportsCommentDiv.append(commentDiv)
     }
@@ -285,4 +285,21 @@ function displayComments(username: string, context: string, category: string, us
     else if(!mobileGamesDiv.classList.contains("hidden")&& category == categoryMobileGame.innerText){
         mobileGameCommentDiv.append(commentDiv)
     }
+
+    if(username === loggedInUser){
+        const trashImagUrl = new URL('./images/trash.png', import.meta.url);
+        const deleteTrashCan = document.createElement("img") as HTMLImageElement;
+        deleteTrashCan.src = trashImagUrl.toString();
+        deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
+        commentDiv.append(deleteTrashCan);
+
+        deleteTrashCan.addEventListener("click", async event=>{
+            console.log(key);
+            
+            await deleteComment(key);
+            commentDiv.classList.add("hidden")
+            
+        })
+    }
+
 };
