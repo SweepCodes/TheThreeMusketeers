@@ -122,26 +122,26 @@ headerNavbar.addEventListener("click", async (event) => {
             modifyClassOnElements("remove", "hidden", mobileGamesDiv);
             modifyClassOnElements("add", "hidden", moviesTVShowsDiv, eSportsDiv, homePageDiv, profileDiv);
 
-            await displayAllComments();
+            await displayAllComments(loggedInUser);
             break;
         case "Movies/TV-Shows":
             modifyClassOnElements("remove", "hidden", moviesTVShowsDiv);
             modifyClassOnElements("add", "hidden", mobileGamesDiv, eSportsDiv, homePageDiv, profileDiv);
 
-            await displayAllComments();
+            await displayAllComments(loggedInUser);
             break;
         case "E-Sports":
             modifyClassOnElements("remove", "hidden", eSportsDiv);
             modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, homePageDiv, profileDiv);
 
-            displayAllComments();
+            displayAllComments(loggedInUser);
             break;
         default:
             if (target.id == "logo" && !navBar.classList.contains("hidden")) {
                 modifyClassOnElements("remove", "hidden", homePageDiv);
                 modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, eSportsDiv, profileDiv);
             } else if (target.id == "logged-in-profile-pic") {
-                displayUserComments(loggedInUser);
+                displayUserComments(selectedUser,loggedInUser);
                 modifyClassOnElements("remove", "hidden", profileDiv);
                 modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
                 displayProfilePages(loggedInUser, loggedInUser);
@@ -159,7 +159,7 @@ asideDiv.addEventListener("click", async (event) => {
     const target = event.target as HTMLElement;
     if (target.classList.contains("users")) {
         selectedUser = target.innerText;
-        displayUserComments(selectedUser);
+        displayUserComments(selectedUser, loggedInUser);
         modifyClassOnElements("remove", "hidden", profileDiv);
         modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
         await displayProfilePages(selectedUser, loggedInUser);
@@ -198,7 +198,7 @@ async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, com
             await postComment(userId, category, context, username);
         }
     }
-    displayAllComments();
+    displayAllComments(loggedInUser);
 
     commentInput.value = "";
 }

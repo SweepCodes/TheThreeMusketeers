@@ -12,7 +12,7 @@ const categoryMobileGame = document.querySelector("#mobile-games-title") as HTML
 const mobileGameCommentDiv = document.querySelector("#mobile-games-comments-posted") as HTMLDivElement;
 
 const userCommentsMainDiv = document.querySelector("#user-comments") as HTMLDivElement;
-let loggedInUser: string;
+
 
 export function applyProfilePic(userObj: Users, usernameInput: HTMLInputElement, passwordInput: HTMLInputElement): void {
     const loggedInProfilePicImgElement = document.getElementById("logged-in-profile-pic") as HTMLImageElement;
@@ -63,7 +63,7 @@ export async function displayUsersInAside(): Promise<void> {
     }
 }
 
-export async function displayUserComments(chosenUser: string) {
+export async function displayUserComments(chosenUser: string, loggedInUser:string) {
     const userComments = await getComments();
     userCommentsMainDiv.innerHTML = " ";
     const userCommentH1 = document.createElement("h1") as HTMLHeadingElement;
@@ -92,7 +92,7 @@ export async function displayUserComments(chosenUser: string) {
           }
           
           if (chosenUser === loggedInUser) {
-              const trashImagUrl = new URL('./images/trash.png', import.meta.url);
+              const trashImagUrl = new URL('../images/trash.png', import.meta.url);
               const deleteTrashCan = document.createElement("img") as HTMLImageElement;
               deleteTrashCan.src = trashImagUrl.toString();
               deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
@@ -110,7 +110,7 @@ export async function displayUserComments(chosenUser: string) {
 }
 
 
-function displayComments(username: string, context: string, category: string, user: string, key: string) {
+function displayComments(username: string, context: string, category: string, loggedInUser: string, key: string) {
     const commentDiv = document.createElement("div") as HTMLDivElement;
     const commentP = document.createElement("p") as HTMLParagraphElement;
     const userH2 = document.createElement("h2") as HTMLHeadElement;
@@ -142,7 +142,7 @@ function displayComments(username: string, context: string, category: string, us
     }
 }
 
-export async function displayAllComments() {
+export async function displayAllComments(loggedInUser:string) {
     const comments = await getComments();
     moviesCommentDiv.innerHTML = "";
     esportsCommentDiv.innerHTML = "";
