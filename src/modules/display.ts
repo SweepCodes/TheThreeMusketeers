@@ -64,39 +64,51 @@ export async function displayUsersInAside(): Promise<void> {
 }
 
 export async function displayUserComments(chosenUser: string) {
-    const userCommets = await getComments();
+    const userComments = await getComments();
     userCommentsMainDiv.innerHTML = " ";
     const userCommentH1 = document.createElement("h1") as HTMLHeadingElement;
     userCommentH1.innerText = "Profile comments";
     userCommentsMainDiv.append(userCommentH1);
     let commentsCount: number = 0;
-    for (const key in userCommets) {
-        if (chosenUser == userCommets[key].username) {
-            const userCommentDiv = document.createElement("div") as HTMLDivElement;
-            const userCommentP = document.createElement("p") as HTMLParagraphElement;
-            userCommentDiv.classList.add("forum-container");
-            userCommentP.innerText = userCommets[key].context;
-            userCommentDiv.append(userCommentP);
-            userCommentsMainDiv.append(userCommentDiv);
+   
+    for(const key in userComments){
+      if(chosenUser == userComments[key].username && chosenUser !==loggedInUser){        
+          commentsCount++
+      }
+  }
+  let removenumber: number = commentsCount - 3;
 
-            if (chosenUser === loggedInUser) {
-                const trashImagUrl = new URL("../images/trash.png", import.meta.url);
-                const deleteTrashCan = document.createElement("img") as HTMLImageElement;
-                deleteTrashCan.src = trashImagUrl.toString();
-                deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
-                userCommentDiv.append(deleteTrashCan);
-                deleteTrashCan.addEventListener("click", () => {
-                    deleteComment(key);
-                    userCommentDiv.remove();
-                });
-            }
-            commentsCount++;
-            if (commentsCount >= 3 && chosenUser !== loggedInUser) {
-                break;
-            }
-        }
-    }
+  for(const key in userComments){
+      if(chosenUser == userComments[key].username){
+          const userCommentDiv = document.createElement("div") as HTMLDivElement;
+          const userCommentP = document.createElement("p") as HTMLParagraphElement;
+          userCommentDiv.classList.add("forum-container")
+          userCommentP.innerText = userComments[key].context;
+          userCommentDiv.append(userCommentP);
+          userCommentsMainDiv.append(userCommentDiv);
+          if(removenumber > 0){
+              removenumber--;
+              userCommentDiv.remove();
+          }
+          
+          if (chosenUser === loggedInUser) {
+              const trashImagUrl = new URL('./images/trash.png', import.meta.url);
+              const deleteTrashCan = document.createElement("img") as HTMLImageElement;
+              deleteTrashCan.src = trashImagUrl.toString();
+              deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
+              userCommentDiv.append(deleteTrashCan);
+              deleteTrashCan.addEventListener("click", ()=>{
+                  deleteComment(key)
+                  userCommentDiv.remove()
+                  
+              })
+          }        
+      }
+     
+  }
+  
 }
+
 
 function displayComments(username: string, context: string, category: string, user: string, key: string) {
     const commentDiv = document.createElement("div") as HTMLDivElement;
