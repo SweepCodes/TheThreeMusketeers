@@ -1,5 +1,5 @@
-import { errorMessageLoginRegisterPage } from "./error.ts";
-import { Users, getUsers } from "./fetch.ts";
+import {errorMessageLoginRegisterPage} from "./error.ts";
+import {Users, getUsers} from "./fetch.ts";
 
 export function clearUserProfilePicChoice(): void {
     const profileImgElementOne = document.getElementById("profile-images-one") as HTMLImageElement;
@@ -25,7 +25,7 @@ export async function loginChecker(user: string, pass: string): Promise<boolean>
         const currentUser: Users = users[key];
         if (currentUser.username === user && currentUser.password === pass) {
             const errorMessagePEl = document.getElementById("error-message") as HTMLParagraphElement;
-            if(errorMessagePEl) errorMessagePEl.remove();
+            if (errorMessagePEl) errorMessagePEl.remove();
             return true;
         }
     }
@@ -44,13 +44,13 @@ export async function registerChecker(user: string, password: string, confirmPas
         for (const key in users) {
             const currentUser: Users = users[key];
             if (currentUser.username === user) {
-                errorMessageLoginRegisterPage("Username already!")
+                errorMessageLoginRegisterPage("Username already!");
                 return false;
             }
         }
         if (password === confirmPassword) {
             const errorMessagePEl = document.getElementById("error-message") as HTMLParagraphElement;
-            if(errorMessagePEl) errorMessagePEl.remove();
+            if (errorMessagePEl) errorMessagePEl.remove();
             return true;
         } else {
             errorMessageLoginRegisterPage("Passwords needs to be the same!");

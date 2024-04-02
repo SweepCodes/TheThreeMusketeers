@@ -1,9 +1,6 @@
 import {clearUserProfilePicChoice, loginChecker, registerChecker, modifyClassOnElements} from "./modules/utilities.ts";
-import {getUsers, register, deleteUser, postComment, getComments, deleteComment} from "./modules/fetch.ts";
-import {applyProfilePic, displayProfilePages, displayUsersInAside} from "./modules/display.ts";
-
-
-//  import trashImage from "./images/trash.png";
+import {getUsers, register, deleteUser, postComment} from "./modules/fetch.ts";
+import {applyProfilePic, displayProfilePages, displayUsersInAside, displayUserComments, displayAllComments} from "./modules/display.ts";
 
 const logInRegisterPage = document.getElementById("log-in-register-page") as HTMLDivElement;
 const logInDiv = document.getElementById("log-in-div") as HTMLDivElement;
@@ -42,8 +39,6 @@ const mobileGamesCommentInput = document.querySelector("#mobile-games-comment") 
 const esportsCommentDiv = document.querySelector("#e-sport-comments-posted") as HTMLDivElement;
 const moviesCommentDiv = document.querySelector("#movies-comments-posted") as HTMLDivElement;
 const mobileGameCommentDiv = document.querySelector("#mobile-games-comments-posted") as HTMLDivElement;
-const userCommentsMainDiv = document.querySelector("#user-comments") as HTMLDivElement;
-
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -59,7 +54,7 @@ logInRegisterPage.addEventListener("click", (event) => {
         registerDiv.classList.toggle("hidden");
 
         const errorMessagePEl = document.getElementById("error-message") as HTMLParagraphElement;
-        if(errorMessagePEl) errorMessagePEl.remove();
+        if (errorMessagePEl) errorMessagePEl.remove();
 
         clearUserProfilePicChoice();
     }
@@ -126,80 +121,34 @@ headerNavbar.addEventListener("click", async (event) => {
         case "Mobile Games":
             modifyClassOnElements("remove", "hidden", mobileGamesDiv);
             modifyClassOnElements("add", "hidden", moviesTVShowsDiv, eSportsDiv, homePageDiv, profileDiv);
-            
+
             await displayAllComments();
             break;
         case "Movies/TV-Shows":
             modifyClassOnElements("remove", "hidden", moviesTVShowsDiv);
             modifyClassOnElements("add", "hidden", mobileGamesDiv, eSportsDiv, homePageDiv, profileDiv);
-            
+
             await displayAllComments();
             break;
         case "E-Sports":
             modifyClassOnElements("remove", "hidden", eSportsDiv);
             modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, homePageDiv, profileDiv);
-            
-            await displayAllComments();
+
+            displayAllComments();
             break;
         default:
             if (target.id == "logo" && !navBar.classList.contains("hidden")) {
                 modifyClassOnElements("remove", "hidden", homePageDiv);
                 modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, eSportsDiv, profileDiv);
             } else if (target.id == "logged-in-profile-pic") {
-                displayUserComments(loggedInUser)
+                displayUserComments(loggedInUser);
                 modifyClassOnElements("remove", "hidden", profileDiv);
                 modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
-                await displayProfilePages(loggedInUser, loggedInUser);
+                displayProfilePages(loggedInUser, loggedInUser);
             }
             break;
     }
 });
-
-//////funktionen gör så att kommentarerna hamnar hos rätt user///////////////////////
-
-async function displayUserComments(chosenUser: string) {
-    const userCommets = await getComments();
-    userCommentsMainDiv.innerHTML = " ";
-    const userCommentH1 = document.createElement("h1") as HTMLHeadingElement;
-    userCommentH1.innerText = "Profile comments";
-    userCommentsMainDiv.append(userCommentH1);
-    let commentsCount:number = 0;
-    for(const key in userCommets){
-        if(chosenUser == userCommets[key].username){
-            const userCommentDiv = document.createElement("div") as HTMLDivElement;
-            const userCommentP = document.createElement("p") as HTMLParagraphElement;
-            userCommentDiv.classList.add("forum-container")
-            userCommentP.innerText = userCommets[key].context;
-            userCommentDiv.append(userCommentP);
-            userCommentsMainDiv.append(userCommentDiv);
-            
-            if (chosenUser === loggedInUser) {
-                const trashImagUrl = new URL('./images/trash.png', import.meta.url);
-                const deleteTrashCan = document.createElement("img") as HTMLImageElement;
-                deleteTrashCan.src = trashImagUrl.toString();
-                deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
-                userCommentDiv.append(deleteTrashCan);
-                deleteTrashCan.addEventListener("click", ()=>{
-                    deleteComment(key)
-                    userCommentDiv.remove()
-                    
-                })
-            }
-            commentsCount++;
-            if(commentsCount>=3 && chosenUser !==loggedInUser){
-                break;
-            }
-        }
-       
-    }
-    
-}
-
- 
-
-
-
-
 logOutButton.addEventListener("click", () => {
     modifyClassOnElements("remove", "hidden", logInDiv);
     modifyClassOnElements("add", "hidden", deleteAccountButton, navBar, homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv, profileDiv, asideDiv);
@@ -208,9 +157,9 @@ logOutButton.addEventListener("click", () => {
 
 asideDiv.addEventListener("click", async (event) => {
     const target = event.target as HTMLElement;
-    if(target.classList.contains("users")){
+    if (target.classList.contains("users")) {
         selectedUser = target.innerText;
-        displayUserComments(selectedUser)
+        displayUserComments(selectedUser);
         modifyClassOnElements("remove", "hidden", profileDiv);
         modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
         await displayProfilePages(selectedUser, loggedInUser);
@@ -246,61 +195,10 @@ async function commentHandler(event: SubmitEvent, categoryText: HTMLElement, com
     const users = await getUsers();
     for (const key in users) {
         if (users[key].username === loggedInUser) {
-            // userId = key;
             await postComment(userId, category, context, username);
         }
     }
     displayAllComments();
-    
+
     commentInput.value = "";
 }
-
-async function displayAllComments() {
-    const comments = await getComments();
-    moviesCommentDiv.innerHTML = "";
-    esportsCommentDiv.innerHTML = "";
-    mobileGameCommentDiv.innerHTML = "";
-    
-    for(const key in comments){
-        displayComments(comments[key].username, comments[key].context, comments[key].category, loggedInUser, key )
-    }
-}
-
-
-function displayComments(username: string, context: string, category: string, user: string, key: string){
-    const commentDiv = document.createElement("div") as HTMLDivElement;
-    const commentP = document.createElement("p") as HTMLParagraphElement;
-    const userH2 = document.createElement("h2") as HTMLHeadElement;
-    userH2.innerText = username;
-    commentP.innerText = context;
-
-    commentDiv.classList.add("forum-container");
-    commentDiv.append(userH2, commentP);
-
-    
-    if(!eSportsDiv.classList.contains("hidden") && category == categoryEsports.innerText){
-        esportsCommentDiv.append(commentDiv)
-    }
-    else if(!moviesTVShowsDiv.classList.contains("hidden")&& category == categoryMovies.innerText){
-        moviesCommentDiv.append(commentDiv)
-    }
-    else if(!mobileGamesDiv.classList.contains("hidden")&& category == categoryMobileGame.innerText){
-        mobileGameCommentDiv.append(commentDiv)
-    }
-
-    if(username === loggedInUser){
-        const trashImagUrl = new URL('./images/trash.png', import.meta.url);
-        const deleteTrashCan = document.createElement("img") as HTMLImageElement;
-        deleteTrashCan.src = trashImagUrl.toString();
-        deleteTrashCan.classList.add("deleteTrashCanButtonForComments");
-        commentDiv.append(deleteTrashCan);
-
-        deleteTrashCan.addEventListener("click", async ()=>{
-            
-            await deleteComment(key);
-            commentDiv.remove()
-            
-        })
-    }
-
-};
