@@ -44,7 +44,7 @@ export async function registerChecker(user: string, password: string, confirmPas
         for (const key in users) {
             const currentUser: Users = users[key];
             if (currentUser.username === user) {
-                errorMessageLoginRegisterPage("Username already!");
+                errorMessageLoginRegisterPage("Username already Exsists!");
                 return false;
             }
         }

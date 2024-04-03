@@ -36,9 +36,6 @@ const moviesCommentInput = document.querySelector("#movies-tv-shows-comment") as
 const mobileGameCommentForm = document.querySelector("#mobile-games-form") as HTMLFormElement;
 const categoryMobileGame = document.querySelector("#mobile-games-title") as HTMLLIElement;
 const mobileGamesCommentInput = document.querySelector("#mobile-games-comment") as HTMLInputElement;
-const esportsCommentDiv = document.querySelector("#e-sport-comments-posted") as HTMLDivElement;
-const moviesCommentDiv = document.querySelector("#movies-comments-posted") as HTMLDivElement;
-const mobileGameCommentDiv = document.querySelector("#mobile-games-comments-posted") as HTMLDivElement;
 
 let chosenImage: string;
 let loggedInUser: string;
@@ -141,7 +138,7 @@ headerNavbar.addEventListener("click", async (event) => {
                 modifyClassOnElements("remove", "hidden", homePageDiv);
                 modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, eSportsDiv, profileDiv);
             } else if (target.id == "logged-in-profile-pic") {
-                displayUserComments(selectedUser,loggedInUser);
+                displayUserComments(selectedUser, loggedInUser);
                 modifyClassOnElements("remove", "hidden", profileDiv);
                 modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
                 displayProfilePages(loggedInUser, loggedInUser);
