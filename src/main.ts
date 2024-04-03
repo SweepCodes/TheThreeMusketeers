@@ -138,6 +138,7 @@ headerNavbar.addEventListener("click", async (event) => {
                 modifyClassOnElements("remove", "hidden", homePageDiv);
                 modifyClassOnElements("add", "hidden", mobileGamesDiv, moviesTVShowsDiv, eSportsDiv, profileDiv);
             } else if (target.id == "logged-in-profile-pic") {
+                selectedUser = loggedInUser;
                 displayUserComments(selectedUser, loggedInUser);
                 modifyClassOnElements("remove", "hidden", profileDiv);
                 modifyClassOnElements("add", "hidden", homePageDiv, eSportsDiv, mobileGamesDiv, moviesTVShowsDiv);
