@@ -69,8 +69,8 @@ profileImageDiv.addEventListener("click", (event) => {
         profileImgElementThree.classList.toggle("user-choice", target.id === "profile-images-three");
 
         if (target.id === "profile-images-one") chosenImage = new URL(`./images/musketeer1.png`, import.meta.url);
-        // if (target.id === "profile-images-two") chosenImage = profileImgElementTwo.src;
-        // if (target.id === "profile-images-three") chosenImage = profileImgElementThree.src;
+        if (target.id === "profile-images-two") chosenImage = new URL(`./images/musketeer2.png`, import.meta.url);
+        if (target.id === "profile-images-three") chosenImage = new URL(`./images/musketeer3.png`, import.meta.url);
     }
 });
 
