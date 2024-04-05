@@ -37,7 +37,7 @@ const mobileGameCommentForm = document.querySelector("#mobile-games-form") as HT
 const categoryMobileGame = document.querySelector("#mobile-games-title") as HTMLLIElement;
 const mobileGamesCommentInput = document.querySelector("#mobile-games-comment") as HTMLInputElement;
 
-let chosenImage: string;
+let chosenImage: URL;
 let loggedInUser: string;
 let selectedUser: string;
 let userId: string;
@@ -57,6 +57,9 @@ logInRegisterPage.addEventListener("click", (event) => {
     }
 });
 
+// console.log(currentUser.profilepic);
+//             const profilePicture = new URL(`../images/${currentUser.profilepic}`, import.meta.url);
+
 profileImageDiv.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
 
@@ -65,9 +68,9 @@ profileImageDiv.addEventListener("click", (event) => {
         profileImgElementTwo.classList.toggle("user-choice", target.id === "profile-images-two");
         profileImgElementThree.classList.toggle("user-choice", target.id === "profile-images-three");
 
-        if (target.id === "profile-images-one") chosenImage = profileImgElementOne.src;
-        if (target.id === "profile-images-two") chosenImage = profileImgElementTwo.src;
-        if (target.id === "profile-images-three") chosenImage = profileImgElementThree.src;
+        if (target.id === "profile-images-one") chosenImage = new URL(`./images/musketeer1.png`, import.meta.url);
+        // if (target.id === "profile-images-two") chosenImage = profileImgElementTwo.src;
+        // if (target.id === "profile-images-three") chosenImage = profileImgElementThree.src;
     }
 });
 

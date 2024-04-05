@@ -25,7 +25,7 @@ export async function getComments(): Promise<Comments> {
     return data.comments as Comments;
 }
 
-export async function register(username: string, password: string, profilepic: string): Promise<Users> {
+export async function register(username: string, password: string, profilepic: URL): Promise<Users> {
     const url = baseUrl + "/users/.json";
     let userInfo = {username, password, profilepic};
 
