@@ -1,4 +1,4 @@
-# FE23-JS2-Slutprojekt-TheThreeMusketeers 
+# TheThreeMusketeers 
 # Musketeerium 
 A website made where people can discuss their favorite topics within the world of Movies/tvShows, esports and mobilegames.
 Website works as follows:
